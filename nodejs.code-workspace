@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "MovieApp",
+			"path": "../MovieApp/MovieApp"
+		}
+	],
+	"settings": {}
+}
