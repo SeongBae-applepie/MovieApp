@@ -49,6 +49,10 @@ app.get('/wbs',function(req,res){
     res.sendFile(__dirname+"/public/wbs.html");
  });
 
+ app.get('/demo',function(req,res){
+    res.sendFile(__dirname+"/public/demo.html");
+ });
+
 app.listen(port, () => {
   //클라이언트 대기
   console.log("listening on ??? *:" + port);
