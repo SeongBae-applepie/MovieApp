@@ -5,8 +5,7 @@ const mysql = require("mysql2");
 const dbconfig = require("./public/config/db_config");
 const conn = mysql.createConnection(dbconfig);
 app.use(express.static(path.join(__dirname+"/public")));
-
-// app.use(express.static(path.join("./public")));
+app.use(express.static(path.join("./public")));
 
 
 
