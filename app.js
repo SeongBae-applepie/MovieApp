@@ -6,7 +6,7 @@ const dbconfig = require("./public/config/db_config");
 const conn = mysql.createConnection(dbconfig);
 app.use(express.static(path.join(__dirname+"/public")));
 
-app.use(express.static(path.join("./public/script")));
+// app.use(express.static(path.join("./public")));
 
 
 
@@ -51,6 +51,8 @@ app.get('/wbs',function(req,res){
 
  app.get('/demo',function(req,res){
     res.sendFile(__dirname+"/public/demo.html");
+   // res.end(__dirname+"/public/src/db.PNG")
+    
  });
 
 app.listen(port, () => {
