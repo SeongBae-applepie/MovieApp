@@ -8,5 +8,7 @@
 			"path": "../MovieApp/MovieApp"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "nodejs"
+	}
 }

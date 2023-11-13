@@ -28,6 +28,7 @@ conn.query(sql, function(err, rows, fields){
         res.send(rows);
         
 });
+conn.end();
 });
 
 
