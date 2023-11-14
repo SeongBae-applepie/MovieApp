@@ -25,6 +25,8 @@ conn.query(sql, function(err, rows, fields){
             console.error('error connecting: ' + err.stack);
         }
         
+
+        
         res.send(rows);
         
 });
