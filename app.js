@@ -105,6 +105,21 @@ app.post("/insert", function (req, res) {
   conn.end();
 });
 
+app.post("/delete", function (req, res) {
+  console.log(req.body.uuid);
+
+  sql = "delete from users1 where id_uuid =" + '"' + req.body.uuid + '"';
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+});
+
 app.listen(port, () => {
   //클라이언트 대기
   console.log("listening on ??? *:" + port);
