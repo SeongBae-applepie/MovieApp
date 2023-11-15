@@ -67,7 +67,14 @@ app.get("/get_db", function (req, res) {
 //DB_C
 
 app.get("/insert", function (request, response) {
-  fs.readFile("./public/CRUD.html", "utf8", function (error, data) {
+  fs.readFile("./public/CRD.html", "utf8", function (error, data) {
+    //응답
+    response.send(data);
+  });
+});
+
+app.get("/update", function (request, response) {
+  fs.readFile("./public/U.html", "utf8", function (error, data) {
     //응답
     response.send(data);
   });

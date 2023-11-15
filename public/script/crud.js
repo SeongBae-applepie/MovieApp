@@ -37,18 +37,25 @@ fetch(request)
   .then((data) => {
     for (var i = 0; i < data.length; i++) {
       const li = document.createElement("li");
-      const btn = document.createElement("button");
+      const btn_d = document.createElement("button");
+      const btn_u = document.createElement("button");
       li.setAttribute("id", i);
-      btn.setAttribute("id", data[i].id_uuid);
+      btn_d.setAttribute("id", data[i].id_uuid);
+      btn_u.setAttribute("id", data[i].id_uuid);
       const textNode = document.createTextNode(
         "id : " + data[i].id + " 이름 : " + data[i].user_name + "     "
       );
-      const textbtn = document.createTextNode("삭제");
+      const textbtn_d = document.createTextNode("삭제");
+      const textbtn_u = document.createTextNode("수정");
       li.appendChild(textNode);
-      btn.appendChild(textbtn);
-      document.getElementById("user_list").appendChild(li).appendChild(btn);
+      btn_d.appendChild(textbtn_d);
+      btn_u.appendChild(textbtn_u);
+      document.getElementById("user_list").appendChild(li).appendChild(btn_d);
 
-      btn.onclick = function (e) {
+      document.getElementById("user_list").appendChild(btn_u);
+
+      //삭제 btn
+      btn_d.onclick = function (e) {
         console.log(e.target.id);
 
         obj = {
@@ -58,6 +65,25 @@ fetch(request)
         console.log(obj);
 
         fetch("http://127.0.0.1:51713/delete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        });
+
+        location.reload(true);
+      };
+
+      //수정 btn
+      btn_d.onclick = function (e) {
+        console.log(e.target.id);
+
+        obj = {
+          uuid: e.target.id,
+        };
+
+        fetch("http://127.0.0.1:51713/update", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
