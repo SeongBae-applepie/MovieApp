@@ -1,5 +1,3 @@
-
-console.log("stat");
 var today = new Date();
 let year = today.getFullYear(); // 년도
 let month = today.getMonth() + 1; // 월
@@ -7,8 +5,8 @@ let date = today.getDate() - 1; // 날짜
 
 if (month < 10) {
   month = "0" + month;
-}else if(date < 10){
-  date = "0"+date;
+} else if (date < 10) {
+  date = "0" + date;
 }
 
 var request =
@@ -16,11 +14,6 @@ var request =
   year +
   month +
   date;
-
-console.log("set date : " + year + month + date);
-
-
-
 
 fetch(request)
   .then((response) => {
@@ -39,7 +32,6 @@ fetch(request)
       console.log(data.boxOfficeResult.dailyBoxOfficeList[i].movieNm + "\n");
       document.getElementById("moivelist").appendChild(li);
     }
- 
   })
   .catch((err) => {
     console.log("er", err);
