@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    ol :nth-child(2n + 1) {
+      padding: 10px;
+    }
+    ol :nth-child(2n) {
+      padding: 10px;
+      background: #a0a0a0;
+    }
+  </style>
+  <body>
+    <h1>API 일별 박스오피스 순위</h1>
+    <p id="datetext"></p>
+    <ol id="moivelist"></ol>
+    <script src="/api_sc.js"></script>
+  </body>
+</html>

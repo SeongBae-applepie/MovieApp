@@ -1,29 +1,23 @@
-console.log("start db_sc");
-const mysql = require("mysql2");
-console.log(__dirname);
-const dbconfig = (module.exports = {
-  host: "localhost",
-  user: "root",
-  password: "1215",
-  database: "movie_Db",
-});
-
-const conn = mysql.createConnection(dbconfig);
-
-window.onload = init();
-
-function init() {
-  var p = document.getElementById("text");
-
-  conn.connect(); // mysql과 연결
-  var sql = "select * from users1";
-  conn.query(sql, function (err, rows, fields) {
-    if (err) {
-      console.error("error connecting: " + err.stack);
+var request = "http://127.0.0.1:51713/get_db";
+//get db
+fetch(request)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      console.log(i);
+      const li = document.createElement("li");
+      li.setAttribute("id", i);
+      const textNode = document.createTextNode(
+        "id : " + data[i].id + " 이름 : " + data[i].user_name
+      );
+      li.appendChild(textNode);
+      console.log(data[0].id);
+      document.getElementById("user_list").appendChild(li);
     }
-
-    res.send(rows);
-    p.innerText(rows[0]);
+  })
+  .catch((err) => {
+    console.log("er", err);
   });
-  conn.end();
-}

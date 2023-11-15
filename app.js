@@ -1,5 +1,12 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+var fs = require("fs");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const path = require("path");
 const mysql = require("mysql2");
 const dbconfig = require("./public/config/db_config");
@@ -15,16 +22,6 @@ app.get("/", function (req, res) {
 });
 
 app.get("/db", function (req, res) {
-  //   const conn = mysql.createConnection(dbconfig);
-  //   conn.connect(); // mysql과 연결
-  //   var sql = "select * from users1";
-  //   conn.query(sql, function (err, rows, fields) {
-  //     if (err) {
-  //       console.error("error connecting: " + err.stack);
-  //     }
-
-  //     res.send(rows);
-  //   });
   res.sendFile(__dirname + "/public/db.html");
 });
 
@@ -48,25 +45,67 @@ app.get("/demo", function (req, res) {
   // res.end(__dirname+"/public/src/db.PNG")
 });
 
-app.listen(port, () => {
-  //클라이언트 대기
-  console.log("listening on ??? *:" + port);
+app.get("/crud", function (req, res) {
+  res.sendFile(__dirname + "/public/CRUD.html");
 });
 
-function get_db() {
-  var result;
+//DB_R
+app.get("/get_db", function (req, res) {
+  const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
-  var sql = "select * from users2";
-
+  var sql = "select * from users1";
   conn.query(sql, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);
     }
 
-    console.log(rows[0].uuid);
-    result = rows[0][0];
-    console.log("res !!   " + result);
-    console.log("res !!   2" + rows);
-    return result;
+    res.send(rows);
   });
-}
+  conn.end();
+});
+
+//DB_C
+
+app.get("/insert", function (request, response) {
+  fs.readFile("./public/CRUD.html", "utf8", function (error, data) {
+    //응답
+    response.send(data);
+  });
+});
+
+app.post("/insert", function (req, res) {
+  console.log(req.body);
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  var sql =
+    "INSERT INTO users1 (id, passwd, user_name, age)" +
+    "VALUE (" +
+    '"' +
+    req.body.id +
+    '"' +
+    "," +
+    '"' +
+    req.body.psswd +
+    '"' +
+    "," +
+    '"' +
+    req.body.name +
+    '"' +
+    "," +
+    req.body.age +
+    ");";
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+  conn.end();
+});
+
+app.listen(port, () => {
+  //클라이언트 대기
+  console.log("listening on ??? *:" + port);
+});
