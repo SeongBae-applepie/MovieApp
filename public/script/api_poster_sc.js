@@ -1,3 +1,4 @@
+console.log("stat");
 var today = new Date();
 let year = today.getFullYear(); // 년도
 let month = today.getMonth() + 1; // 월
@@ -10,10 +11,9 @@ if (month < 10) {
 }
 
 var request =
-  "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=c3a7a8c29dd8b16ea02a63b2f43335e8&targetDt=" +
-  year +
-  month +
-  date;
+  "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&title=아이언맨&ServiceKey=4786FH56Q4Q7K100VTQK";
+
+console.log("set date : " + year + month + date);
 
 fetch(request)
   .then((response) => {
