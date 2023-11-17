@@ -17,31 +17,28 @@ var port = 51713;
 
 
 setInterval(function () {
-    conn = mysql.createConnection(dbconfig);
-    console.log("ccDB");
-    conn.connect(); // mysql과 연결
-    conn.query('SELECT 1');
-}, 60000);
+  console.log("...");
+}, 180000);
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/public/home.html");
+  res.sendFile(__dirname + "/public/html/home.html");
 });
 
 app.get("/db", function (req, res) {
-  res.sendFile(__dirname + "/public/db.html");
+  res.sendFile(__dirname + "/public/html/db.html");
 });
 
 app.get("/api", function (req, res) {
-  res.sendFile(__dirname + "/public/api.html");
+  res.sendFile(__dirname + "/public/html/api.html");
 });
 
 
 app.get("/wbs", function (req, res) {
-  res.sendFile(__dirname + "/public/wbs.html");
+  res.sendFile(__dirname + "/public/html/wbs.html");
 });
 
 app.get("/demo", function (req, res) {
-  res.sendFile(__dirname + "/public/demo.html");
+  res.sendFile(__dirname + "/public/html/demo.html");
   // res.end(__dirname+"/public/src/db.PNG")
 });
 
@@ -51,7 +48,7 @@ app.get("/demo", function (req, res) {
 
 //DB_R
 app.get("/get_db", function (req, res) {
-    conn = mysql.createConnection(dbconfig);
+  conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
   var sql = "select * from users1";
   conn.query(sql, function (err, rows, fields) {
@@ -60,18 +57,19 @@ app.get("/get_db", function (req, res) {
     }
     res.send(rows);
   });
+  conn.end();
 });
 
 //DB_C
 app.get("/crud", function (request, response) {
-  fs.readFile("./public/CRUD.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/CRUD.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
 //DB_U
 app.get("/update", function (request, response) {
-  fs.readFile("./public/update.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/update.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
@@ -107,6 +105,8 @@ app.post("/insert", function (req, res) {
     }
     res.send(rows);
   });
+
+  conn.end();
 });
 
 //sql 삭제
@@ -124,6 +124,8 @@ app.post("/delete", function (req, res) {
 
     res.send(rows);
   });
+
+  conn.end();
 });
 
 //sql 생성
@@ -185,6 +187,8 @@ app.post("/update_p", function (req, res) {
 
     res.send(rows);
   });
+
+  conn.end();
 });
 
 app.listen(port, () => {

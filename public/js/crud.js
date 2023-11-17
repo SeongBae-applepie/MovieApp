@@ -32,7 +32,7 @@ function btn_add_user_onclick() {
     },
     body: JSON.stringify(obj),
   });
-  location.reload(true);
+  location.assign();
 }
 
 //sql 에서 값 가져오기
@@ -88,7 +88,7 @@ fetch("http://pbl.hknu.ac.kr:51713/get_db")
           body: JSON.stringify(obj),
         });
 
-        location.reload(true);
+        window.location.reload(true);
       };
 
       //수정 btn
