@@ -10,7 +10,6 @@ app.use(express.urlencoded({ extended: false }));
 const path = require("path");
 const mysql = require("mysql2");
 const dbconfig = require("./public/config/db_config");
-const conn = mysql.createConnection(dbconfig);
 
 app.use(express.static(path.join(__dirname + "/public")));
 app.use(express.static(path.join("./public")));
@@ -29,10 +28,8 @@ app.get("/api", function (req, res) {
   res.sendFile(__dirname + "/public/api.html");
 });
 
-app.get("/m", function (req, res) {
-  var result = get_db();
-  console.log(result);
-  res.send(result);
+app.get("/api_p", function (req, res) {
+  res.sendFile(__dirname + "/public/api_poster.html");
 });
 
 app.get("/wbs", function (req, res) {
