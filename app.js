@@ -42,6 +42,11 @@ app.get("/demo", function (req, res) {
   // res.end(__dirname+"/public/src/db.PNG")
 });
 
+app.get("/home_view", function (req, res) {
+  res.sendFile(__dirname + "/public/html/home_view.html");
+  // res.end(__dirname+"/public/src/db.PNG")
+});
+
 // app.get("/crud", function (req, res) {
 //   res.sendFile(__dirname + "/public/CRUD.html");
 // });
