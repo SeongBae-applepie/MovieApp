@@ -17,32 +17,36 @@ app.use(express.static(path.join("./public")));
 var port = 51713;
 
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/public/home.html");
+  res.sendFile(__dirname + "/public/html/home.html");
 });
 
 app.get("/db", function (req, res) {
-  res.sendFile(__dirname + "/public/db.html");
+  res.sendFile(__dirname + "/public/html/db.html");
 });
 
 app.get("/api", function (req, res) {
-  res.sendFile(__dirname + "/public/api.html");
+  res.sendFile(__dirname + "/public/html/api.html");
 });
 
 app.get("/api_p", function (req, res) {
-  res.sendFile(__dirname + "/public/api_poster.html");
+  res.sendFile(__dirname + "/public/html/api_poster.html");
 });
 
 app.get("/wbs", function (req, res) {
-  res.sendFile(__dirname + "/public/wbs.html");
+  res.sendFile(__dirname + "/public/html/wbs.html");
 });
 
 app.get("/demo", function (req, res) {
-  res.sendFile(__dirname + "/public/demo.html");
+  res.sendFile(__dirname + "/public/html/demo.html");
   // res.end(__dirname+"/public/src/db.PNG")
 });
 
 app.get("/crud", function (req, res) {
-  res.sendFile(__dirname + "/public/CRUD.html");
+  res.sendFile(__dirname + "/public/html/CRUD.html");
+});
+
+app.get("/homeview", function (req, res) {
+  res.sendFile(__dirname + "/public/html/home_view.html");
 });
 
 //DB_R
@@ -62,14 +66,14 @@ app.get("/get_db", function (req, res) {
 
 //DB_C
 app.get("/insert", function (request, response) {
-  fs.readFile("./public/CRUD.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/CRUD.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
 //DB_U
 app.get("/update", function (request, response) {
-  fs.readFile("./public/update.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/update.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
