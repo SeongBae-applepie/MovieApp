@@ -1,4 +1,4 @@
-var request = "http://127.0.0.1:51713/get_db";
+var request = "http://127.0.0.1:51713/get_db_users";
 //get db
 fetch(request)
   .then((response) => {
@@ -11,7 +11,7 @@ fetch(request)
       const li = document.createElement("li");
       li.setAttribute("id", i);
       const textNode = document.createTextNode(
-        "id : " + data[i].id + " 이름 : " + data[i].user_name
+        "id : " + data[i].id + " 이름 : " + data[i].name
       );
       li.appendChild(textNode);
       console.log(data[0].id);
