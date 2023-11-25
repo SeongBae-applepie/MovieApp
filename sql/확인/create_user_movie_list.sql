@@ -5,6 +5,7 @@ num int auto_increment not null primary key,
 movie_id varchar(200) not null,
 movie_name varchar(200) not null,
 movie_star int(5) ,
+movie_like bool ,
 uuid_users varchar(36) default(UUID()) not null,
 foreign key(uuid_users) references users (uuid_users)
 );

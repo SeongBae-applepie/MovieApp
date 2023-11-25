@@ -7,6 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 const path = require("path");
 const mysql = require("mysql2");
 const dbconfig = require("./public/config/db_config");

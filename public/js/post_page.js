@@ -2,6 +2,9 @@ const urlParams = new URL(location.href).searchParams;
 
 const db_num = urlParams.get("id");
 
+console.log("!");
+console.log(db_num);
+
 //commet btn
 const btn_add_comment = document.getElementById("comment_btn");
 
