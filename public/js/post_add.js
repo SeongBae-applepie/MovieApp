@@ -1,6 +1,8 @@
 const urlParams = new URL(location.href).searchParams;
 
 const db_uuid = urlParams.get("id");
+
+console.log(db_uuid);
 //create Textfield
 const user_id = document.getElementById("users");
 const post_conent = document.getElementById("memo");

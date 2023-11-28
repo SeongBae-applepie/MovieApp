@@ -97,7 +97,6 @@ app.get("/get_all_post", function (req, res) {
     if (err) {
       console.error("error connecting: " + err.stack);
     }
-    console.log(rows);
     res.send(rows);
   });
   conn.end();
@@ -245,11 +244,11 @@ app.post("/update_p", function (req, res) {
 
 //글 생성 post
 app.post("/insert_post", function (req, res) {
-  console.log("Post_C");
+  console.log("Post_insert");
 
   var post_title = req.body.post_title;
   var uuid_users = req.body.uuid_users;
-  var post_conent = req.body.post_conent;
+  var post_content = req.body.post_conent;
 
   if ((req.body.post_debate = "on")) {
     post_debate = 1;
@@ -261,9 +260,59 @@ app.post("/insert_post", function (req, res) {
 
   const conn = mysql.createConnection(dbconfig);
   conn.connect();
-  var sql = `INSERT INTO users_post (post_content, post_debate , post_movie_id, post_movie_name, post_title, uuid_users) VALUE ('${post_conent}','${post_debate}','${post_movie_id}','${post_movie_name}','${post_title}',${uuid_users})`;
+  var sql = `INSERT INTO users_post (post_content, post_debate , post_movie_id, post_movie_name, post_title, uuid_users) VALUE ("${post_content}","${post_debate}","${post_movie_id}","${post_movie_name}","${post_title}","${uuid_users}")`;
 
   conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+  conn.end();
+});
+
+//글 삭제 post
+app.post("/delete_post", function (req, res) {
+  console.log(req.body);
+  console.log("Post_D");
+
+  var oj = {
+    uuid_post: req.body.uuid_post,
+  };
+
+  fetch("http://127.0.0.1:51713/delete_post_C", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(oj),
+  });
+
+  sql2 = `delete from users_post where uuid_post="${req.body.uuid_post}"`;
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  conn.query(sql2, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+  conn.end();
+});
+
+//글 삭제 시 comment 삭제 post
+app.post("/delete_post_C", function (req, res) {
+  console.log(req.body);
+  console.log("Post_D");
+
+  sql1 = `delete from user_comment where uuid_post="${req.body.uuid_post}"`;
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  conn.query(sql1, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);
     }

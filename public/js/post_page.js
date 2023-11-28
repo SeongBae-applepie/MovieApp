@@ -1,11 +1,12 @@
 const urlParams = new URL(location.href).searchParams;
 
 const db_num = urlParams.get("id");
-
 var words = db_num.split("|");
-uuid_user = words[1];
+uuid_post_user = words[1];
 uuid_post_s = words[0];
+uuid_login_s = words[2];
 uuid_post = uuid_post_s.split(" ").join("");
+uuid_login = uuid_login_s.split(" ").join("");
 
 //commet btn
 const btn_add_comment = document.getElementById("comment_btn");
@@ -18,7 +19,7 @@ btn_add_comment.onclick = function () {
   console.log("son");
   var oj = {
     uuid_post: uuid_post,
-    uuid_users: uuid_user,
+    uuid_users: uuid_login,
     comment_conent: li_add_comment.value,
   };
 
@@ -29,6 +30,8 @@ btn_add_comment.onclick = function () {
     },
     body: JSON.stringify(oj),
   });
+
+  location.reload(true);
 };
 
 //Get post content 내용 가져오기
@@ -55,7 +58,7 @@ fetch("http://127.0.0.1:51713/get_id_post?id=" + uuid_post)
       //객체 Text값 설정
       const title = document.createTextNode("제목 : " + data[i].post_title);
 
-      const content = document.createTextNode("내용 : " + data[i].post_conent);
+      const content = document.createTextNode("내용 : " + data[i].post_content);
 
       const movie_id = document.createTextNode(
         "영화id : " + data[i].post_movie_id
@@ -102,7 +105,6 @@ fetch("http://127.0.0.1:51713/get_id_comment?id= " + uuid_post)
     return res.json();
   })
   .then((data) => {
-    console.log("dada");
     console.log(data);
     for (var i = 0; i < data.length; i++) {
       console.log(data.length);
