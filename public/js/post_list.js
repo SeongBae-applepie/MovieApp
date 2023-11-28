@@ -1,7 +1,18 @@
-//create Textfield
+const urlParams = new URL(location.href).searchParams;
+
+const db_num = urlParams.get("id");
+
+console.log("users+id");
+console.log(db_num);
 
 //commet btn
-const btn_add_comment = document.getElementById("comment_btn");
+// const btn_add_comment = document.getElementById("comment_btn");
+// const btn_add_post = document.getElementById("add_post");
+
+function btn_add_post() {
+  window.location.href =
+    "http://127.0.0.1:51713/insert_post?id= " + '"' + db_num + '"';
+}
 
 //sql 에서 값 가져오기
 fetch("http://127.0.0.1:51713/get_all_post")
@@ -22,8 +33,10 @@ fetch("http://127.0.0.1:51713/get_all_post")
       const li_uuid = document.createElement("p");
       const li_uuid_post = document.createElement("p");
 
+      user_post_id = data[i].uuid_post + "|" + data[i].uuid_users;
+
       //객체 Id 값 설정
-      li_c.setAttribute("id", data[i].uuid_post);
+      li_c.setAttribute("id", user_post_id);
       console.log(li_c.id);
 
       //객체 Text값 설정
@@ -39,7 +52,9 @@ fetch("http://127.0.0.1:51713/get_all_post")
         "영화 제목 :" + data[i].post_movie_name
       );
 
-      const uuid = document.createTextNode("post_uuid : " + data[i].uuid_users);
+      const uuid = document.createTextNode(
+        "users_uuid : " + data[i].uuid_users
+      );
 
       const uuid_post = document.createTextNode(
         "post_uuid : " + data[i].uuid_post
@@ -65,11 +80,8 @@ fetch("http://127.0.0.1:51713/get_all_post")
 
       li_c.onclick = function (e) {
         var uuid = e.currentTarget.id;
-        console.log(uuid);
-        setTimeout(() => console.log(uuid), 30000);
 
-        window.location.href =
-          "http://127.0.0.1:51713/post_page?id= " + '"' + uuid + '"';
+        window.location.href = "http://127.0.0.1:51713/post_page?id= " + uuid;
       };
     }
   })

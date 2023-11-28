@@ -3,5 +3,5 @@ module.exports = {
   host: "localhost",
   user: "root",
   password: "1215",
-  database: "movie_Db",
+  database: "movie_db",
 };

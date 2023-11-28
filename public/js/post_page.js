@@ -2,14 +2,37 @@ const urlParams = new URL(location.href).searchParams;
 
 const db_num = urlParams.get("id");
 
-console.log("!");
-console.log(db_num);
+var words = db_num.split("|");
+uuid_user = words[1];
+uuid_post_s = words[0];
+uuid_post = uuid_post_s.split(" ").join("");
 
 //commet btn
 const btn_add_comment = document.getElementById("comment_btn");
+const li_add_comment = document.getElementById("memo");
+const ol_list_comment = document.getElementById("comment_list");
+//comment_list
 
-//sql 에서 값 가져오기
-fetch("http://127.0.0.1:51713/get_all_post")
+//댓글 추가
+btn_add_comment.onclick = function () {
+  console.log("son");
+  var oj = {
+    uuid_post: uuid_post,
+    uuid_users: uuid_user,
+    comment_conent: li_add_comment.value,
+  };
+
+  fetch("http://127.0.0.1:51713/insert_comment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(oj),
+  });
+};
+
+//Get post content 내용 가져오기
+fetch("http://127.0.0.1:51713/get_id_post?id=" + uuid_post)
   .then((res) => {
     return res.json();
   })
@@ -42,7 +65,7 @@ fetch("http://127.0.0.1:51713/get_all_post")
         "영화 제목 :" + data[i].post_movie_name
       );
 
-      const uuid = document.createTextNode("post_uuid : " + data[i].uuid_users);
+      const uuid = document.createTextNode("user_uuid : " + data[i].uuid_users);
 
       //list text append
       li_title.appendChild(title);
@@ -57,13 +80,53 @@ fetch("http://127.0.0.1:51713/get_all_post")
         .appendChild(li_content)
         .appendChild(li_movie_id)
         .appendChild(li_movie_name);
-      document.getElementById("post_list").appendChild(li_c);
 
-      li_c.onclick = function (e) {
-        window.location.href = "http://127.0.0.1:51713/post_page";
-      };
+      document.getElementById("post_list").appendChild(li_c);
     }
   })
   .catch((err) => {
     console.log("er", err);
+  });
+
+//-----get comment list-----
+
+//get comment list
+
+var obj = {
+  uuid_post: uuid_post,
+};
+
+fetch("http://127.0.0.1:51713/get_id_comment?id= " + uuid_post)
+  .then((res) => {
+    console.log(res);
+    return res.json();
+  })
+  .then((data) => {
+    console.log("dada");
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      console.log(data.length);
+      const li_c = document.createElement("li");
+      //list 객체 생성
+      const li_id = document.createElement("p");
+      const li_comment = document.createElement("p");
+
+      //객체 Id 값 설정
+      li_c.setAttribute("id", i);
+
+      //객체 Text값 설정
+      const li_id_t = document.createTextNode("아이디 : " + data[i].uuid_users);
+      const li_comment_t = document.createTextNode(
+        "내용 : " + data[i].comment_conent
+      );
+
+      //list text append
+      li_id.appendChild(li_id_t);
+      li_comment.appendChild(li_comment_t);
+
+      //LiSt 에 값 할당
+      li_c.appendChild(li_id).appendChild(li_comment);
+
+      document.getElementById("comment_list").appendChild(li_c);
+    }
   });

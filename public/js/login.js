@@ -66,7 +66,7 @@ fetch("http://127.0.0.1:51713/get_users")
       );
       const textbtn_d = document.createTextNode("삭제");
       const textbtn_u = document.createTextNode("수정");
-      const textbtn_p = document.createTextNode("글쓰기");
+      const textbtn_p = document.createTextNode("로그인");
 
       //list text append
       li.appendChild(textNode);
@@ -75,8 +75,9 @@ fetch("http://127.0.0.1:51713/get_users")
       btn_p.appendChild(textbtn_p);
 
       //LiSt 에 값 할당
-      document.getElementById("user_list").appendChild(li).appendChild(btn_d);
-      document.getElementById("user_list").appendChild(btn_u);
+      document.getElementById("user_list").appendChild(li);
+      document.getElementById("user_list").append(btn_d);
+      document.getElementById("user_list").append(btn_u);
       document.getElementById("user_list").append(btn_p);
 
       //삭제 btn
@@ -112,7 +113,7 @@ fetch("http://127.0.0.1:51713/get_users")
       btn_p.onclick = function (e) {
         var uuid = e.target.id;
         console.log(uuid);
-        window.location.href = "http://127.0.0.1:51713/insert_post?id=" + uuid;
+        window.location.href = "http://127.0.0.1:51713/post_list?id=" + uuid;
       };
     }
   })

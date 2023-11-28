@@ -43,7 +43,7 @@ app.get("/demo", function (req, res) {
 });
 
 app.get("/crud", function (req, res) {
-  res.sendFile(__dirname + "/public/html/CRUD.html");
+  res.sendFile(__dirname + "/public/html/login.html");
 });
 
 app.get("/homeview", function (req, res) {
@@ -85,11 +85,9 @@ app.get("/post_page", function (request, response) {
 });
 
 //  ------------------------- get.html ^ -------------------------------------------------
-
 //글 전체 가져오기
 app.get("/get_all_post", function (req, res) {
   console.log("Post_C");
-  console.log(req.body);
 
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결.appendChild();
@@ -99,7 +97,45 @@ app.get("/get_all_post", function (req, res) {
     if (err) {
       console.error("error connecting: " + err.stack);
     }
+    console.log(rows);
+    res.send(rows);
+  });
+  conn.end();
+});
 
+//댓글 가져오기 가져오기
+app.get("/get_id_comment", function (req, res) {
+  words = req._parsedOriginalUrl.query;
+  var words = words.split("=%20");
+  uuid_post = words[1];
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결.appendChild();
+
+  var sql = `select * from user_comment where uuid_post="${uuid_post}"`;
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+    res.send(rows);
+  });
+  conn.end();
+});
+
+//글 id값 가져오기
+app.get("/get_id_post", function (req, res) {
+  words = req._parsedOriginalUrl.query;
+  var words = words.split("=");
+  post_uuid = words[1];
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결.appendChild();
+
+  var sql = `select * from users_post WHERE uuid_post = "${post_uuid}"`;
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
     res.send(rows);
   });
   conn.end();
@@ -107,6 +143,7 @@ app.get("/get_all_post", function (req, res) {
 
 //사용자 전체 가져오기
 app.get("/get_users", function (req, res) {
+  console.log("get_users");
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
   var sql = "select * from users";
@@ -125,7 +162,6 @@ app.get("/get_users", function (req, res) {
 //사용자 생성 post
 app.post("/insert_users", function (req, res) {
   console.log("Post_C");
-  console.log(req.body);
   var uuid = req.body.uuiid;
   var id = req.body.id;
   var passwd = req.body.passwd;
@@ -210,7 +246,6 @@ app.post("/update_p", function (req, res) {
 //글 생성 post
 app.post("/insert_post", function (req, res) {
   console.log("Post_C");
-  console.log(req.body);
 
   var post_title = req.body.post_title;
   var uuid_users = req.body.uuid_users;
@@ -226,9 +261,8 @@ app.post("/insert_post", function (req, res) {
 
   const conn = mysql.createConnection(dbconfig);
   conn.connect();
-  var sql = `INSERT INTO users_post (post_conent, post_debate , post_movie_id, post_movie_name, post_title, uuid_users) VALUE ('${post_conent}','${post_debate}','${post_movie_id}','${post_movie_name}','${post_title}',"${uuid_users}")`;
+  var sql = `INSERT INTO users_post (post_content, post_debate , post_movie_id, post_movie_name, post_title, uuid_users) VALUE ('${post_conent}','${post_debate}','${post_movie_id}','${post_movie_name}','${post_title}',${uuid_users})`;
 
-  console.log(sql);
   conn.query(sql, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);
@@ -239,24 +273,38 @@ app.post("/insert_post", function (req, res) {
   conn.end();
 });
 
-// //sql 생성
-// app.post("/get_comment", function (req, res) {
-//   console.log("comment_i");
-//   console.log(req.body);
+//댓글 작성
+app.post("/insert_comment", function (req, res) {
+  var uuid_post = req.body.uuid_post;
+  var uuid_users = req.body.uuid_users;
+  var comment_conent = req.body.comment_conent;
 
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  var sql = `INSERT INTO user_comment (comment_conent, uuid_users, uuid_post) VALUE ( '${comment_conent}', '${uuid_users}' ,'${uuid_post}')`;
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+    res.send(rows);
+  });
+  conn.end();
+});
+
+// //댓글 가져오기
+// app.post("/get_comment", function (req, res) {
 //   var uuid_post = req.body.uuid_post;
 
-//   //나이 예외 처리 필요
+//   console.log(uuid_post);
+
 //   const conn = mysql.createConnection(dbconfig);
 //   conn.connect(); // mysql과 연결
-//   var sql =
-//     "select * from users_comment where uuid_post =" + '"' + uuid_post + '"';
-//   console.log(sql);
+//   var sql = `select * from user_comment where uuid_post="${uuid_post}"`;
 //   conn.query(sql, function (err, rows, fields) {
 //     if (err) {
 //       console.error("error connecting: " + err.stack);
 //     }
-
+//     console.log(rows);
 //     res.send(rows);
 //   });
 //   conn.end();

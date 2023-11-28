@@ -43,7 +43,7 @@ function btn_update_post_onclick() {
     body: JSON.stringify(obj),
   });
 
-  window.location.href = "http://127.0.0.1:51713/CRUD";
+  window.location.href = "http://127.0.0.1:51713/post_list?id=" + db_uuid;
 }
 
 //sql 에서 값 가져오기
