@@ -1,11 +1,12 @@
 const urlParams = new URL(location.href).searchParams;
 
 const db_num = urlParams.get("id");
-
 var words = db_num.split("|");
-uuid_user = words[1];
+uuid_post_user = words[1];
 uuid_post_s = words[0];
+uuid_login_s = words[2];
 uuid_post = uuid_post_s.split(" ").join("");
+uuid_login = uuid_login_s.split(" ").join("");
 
 //commet btn
 const btn_add_comment = document.getElementById("comment_btn");
@@ -19,7 +20,7 @@ btn_add_comment.onclick = function () {
   console.log(li_add_comment.value);
   var oj = {
     uuid_post: uuid_post,
-    uuid_users: uuid_user,
+    uuid_users: uuid_login,
     comment_content: li_add_comment.value,
   };
 

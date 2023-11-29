@@ -67,7 +67,7 @@ app.get("/update_users", function (request, response) {
 
 //글쓰기 페이지
 app.get("/insert_post", function (request, response) {
-  fs.readFile("./public/html/post_add.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/post_add_2.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
@@ -89,7 +89,7 @@ app.get("/post_page", function (request, response) {
 
 //post 전체 가져오기
 app.get("/get_all_post", function (req, res) {
-  console.log("Post_C");
+  console.log("get_all_post");
 
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결.appendChild();
@@ -106,6 +106,7 @@ app.get("/get_all_post", function (req, res) {
 
 //댓글 가져오기 가져오기
 app.get("/get_id_comment", function (req, res) {
+  console.log("get_id_comment");
   words = req._parsedOriginalUrl.query;
   var words = words.split("=%20");
   uuid_post = words[1];
@@ -125,6 +126,7 @@ app.get("/get_id_comment", function (req, res) {
 
 //특정 post 값 가져오기
 app.get("/get_id_post", function (req, res) {
+  console.log("get_id_post");
   words = req._parsedOriginalUrl.query;
   var words = words.split("=");
   post_uuid = words[1];
@@ -160,7 +162,7 @@ app.get("/get_users", function (req, res) {
 
 //사용자 생성 post
 app.post("/insert_users", function (req, res) {
-  console.log("Post_C");
+  console.log("insert_users");
   var uuid = req.body.uuid;
   var id = req.body.id;
   var passwd = req.body.passwd;
@@ -184,7 +186,7 @@ app.post("/insert_users", function (req, res) {
 
 //사용자 삭제 post
 app.post("/delete_users", function (req, res) {
-  console.log("Post_D");
+  console.log("delete_users");
 
   sql = "delete from users where uuid_users =" + '"' + req.body.uuid + '"';
   const conn = mysql.createConnection(dbconfig);
@@ -200,7 +202,7 @@ app.post("/delete_users", function (req, res) {
 
 //사용자 수정 Post
 app.post("/update_p", function (req, res) {
-  console.log("Post_C");
+  console.log("update_id");
   //나이 예외 처리 필요
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
@@ -219,7 +221,8 @@ app.post("/update_p", function (req, res) {
 
 //글 생성 post
 app.post("/insert_post", function (req, res) {
-  console.log("Post_C");
+  console.log("insert_post_post");
+  console.log(req.body);
 
   var post_title = req.body.post_title;
   var uuid_users = req.body.uuid_users;
@@ -250,6 +253,7 @@ app.post("/insert_post", function (req, res) {
 
 //댓글 작성
 app.post("/insert_comment", function (req, res) {
+  console.log("insert_commnet_post");
   var uuid_post = req.body.uuid_post;
   var uuid_users = req.body.uuid_users;
   var comment_content = req.body.comment_content;
@@ -266,9 +270,57 @@ app.post("/insert_comment", function (req, res) {
   conn.end();
 });
 
+//글 삭제 post
+app.post("/delete_post", function (req, res) {
+  console.log("delete_post_post");
+  var oj = {
+    uuid_post: req.body.uuid_post,
+  };
+
+  fetch("http://pbl.hknu.ac.kr:51713/delete_post_C", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(oj),
+  });
+
+  sql2 = `delete from users_post where uuid_post="${req.body.uuid_post}"`;
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  conn.query(sql2, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+  conn.end();
+});
+
+//글 삭제 시 comment 삭제 post
+app.post("/delete_post_C", function (req, res) {
+
+  console.log("delete_post_comment_post");
+
+  sql1 = `delete from users_comment where uuid_post="${req.body.uuid_post}"`;
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  conn.query(sql1, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+
+    res.send(rows);
+  });
+  conn.end();
+});
+
 
 
 app.listen(port, () => {
   //클라이언트 대기
-  console.log("listening on ??? *:" + port);
+  console.log("server Start : " + port);
 });
