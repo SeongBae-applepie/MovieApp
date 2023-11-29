@@ -691,7 +691,7 @@ body {
   overflow: hidden;
 }
 .v241_4 {
-  width: 475px;
+  width: 274;
   height: 224px;
   background: url("../images/v241_4.png");
   background-repeat: no-repeat;
@@ -1076,7 +1076,7 @@ body {
 
 /* 가로 스크롤 적용 */
 .scroll__wrap {
-  width: 100%;
+  width: 390px;
   height: 100%;
   overflow-x: auto;
   white-space: nowrap;
@@ -1084,7 +1084,7 @@ body {
 }
 .scroll--element {
   display: inline-block;
-  width: 40%;
+  width: 50%;
   height: 100%;
   border: 2px solid #222;
   background: #fff;
@@ -1094,4 +1094,8 @@ body {
 }
 .scroll--element + .scroll--element {
   margin-left: 15px;
+}
+
+p {
+  white-space: normal;
 }

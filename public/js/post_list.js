@@ -63,7 +63,7 @@ fetch("http://127.0.0.1:51713/get_all_post")
         "post_uuid : " + data[i].uuid_post
       );
 
-      const btn_delete = document.createTextNode("삭제");
+      const delete_b = document.createTextNode("삭제");
 
       //list text append
       li_title.appendChild(title);
@@ -72,7 +72,7 @@ fetch("http://127.0.0.1:51713/get_all_post")
       li_movie_name.appendChild(movie_name);
       li_uuid.appendChild(uuid);
       li_uuid_post.appendChild(uuid_post);
-      btn_delete_post.appendChild(btn_delete);
+      btn_delete_post.appendChild(delete_b);
 
       //LiSt 에 값 할당
       li_c

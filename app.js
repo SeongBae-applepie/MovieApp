@@ -66,7 +66,7 @@ app.get("/update_users", function (request, response) {
 
 //글쓰기 페이지
 app.get("/insert_post", function (request, response) {
-  fs.readFile("./public/html/post_add.html", "utf8", function (error, data) {
+  fs.readFile("./public/html/post_add_2.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
@@ -84,6 +84,11 @@ app.get("/post_page", function (request, response) {
   });
 });
 
+app.get("/note", function (request, response) {
+  fs.readFile("./public/html/note.html", "utf8", function (error, data) {
+    response.send(data);
+  });
+});
 //  ------------------------- get.html ^ -------------------------------------------------
 //글 전체 가져오기
 app.get("/get_all_post", function (req, res) {
@@ -251,9 +256,9 @@ app.post("/insert_post", function (req, res) {
   var post_content = req.body.post_conent;
 
   if ((req.body.post_debate = "on")) {
-    post_debate = 1;
+    var post_debate = 1;
   } else {
-    post_debate = 0;
+    var post_debate = 0;
   }
   var post_movie_name = req.body.post_movie_name;
   var post_movie_id = req.body.post_movie_id;
