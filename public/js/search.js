@@ -15,9 +15,10 @@ const btn_add_post = document.getElementById("btn_add_post");
 const searchedList = document.querySelector(".container-searched-list");
 const gridBox = document.getElementById("grid-box");
 const strong = document.querySelector("strong");
+const poster_div = document.getElementById("poster_div");
 
 
-btn_add_post.onclick = function () {
+ btn_add_post.onclick = async function () {
   var post_title_v = post_title.value;
   var post_content_v = post_content.value;
   var post_debate_v = post_debate.value;
@@ -35,7 +36,7 @@ btn_add_post.onclick = function () {
   };
 
   //fetch 로 nodejs Post 값 전달.
-  fetch("http://pbl.hknu.ac.kr:51713/insert_post", {
+await fetch("http://pbl.hknu.ac.kr:51713/insert_post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -151,11 +152,19 @@ const createSearchedList = (list, compare) => {
     const div = document.createElement("div");
     const releaseDate = document.createElement("span");
     const span = document.createElement("span");
+    const p_sp = document.createElement("img");
     // li.classList.t("searched-movie");
     li.setAttribute("class", "searched-movie");
     var li_id = orderedResult[i].title + "|" + orderedResult[i].movieSeq;
-    console.log(li_id);
-    li.setAttribute("id", li_id);
+
+    const poster =
+    orderedResult[i].posters.split("|")[0] === ""
+      ? "../assets/images/post_default.jpg"
+      : orderedResult[i].posters.split("|")[0];
+
+  var li_id =
+    orderedResult[i].title + "|" + orderedResult[i].movieSeq + "|" + poster;
+  li.setAttribute("id", li_id);
 
     // 이미지 관련 코드 삭제
     // 포스터 이미지 설정
@@ -172,7 +181,7 @@ const createSearchedList = (list, compare) => {
     );
     // 제목에 삽입
     span.insertAdjacentHTML("afterbegin", filteredTitle);
-
+    p_sp.src = poster;
     li.style.border = "1px solid black";
     li.style.margin = "5px";
     // 요소들을 DOM에 추가
@@ -180,17 +189,17 @@ const createSearchedList = (list, compare) => {
     li.appendChild(div);
     div.appendChild(span);
     div.appendChild(releaseDate);
+    div.appendChild(p_sp);
     // 각 영화 요소에 클릭 이벤트 리스너(상세페이지로 이동하는) 추가
     li.addEventListener("click", (e) => {
       //movieSeq
-      console.log("aaaa");
-      console.log(e.currentTarget.id);
+
       var ss = e.currentTarget.id.split("|");
-      console.log(ss[0]);
-      console.log(ss[1]);
       searchInput.value = ss[0];
       movie_id.value = ss[1];
+      poster_div.src = ss[2];
       gridBox.style.display = "none";
+
     });
   }
 

@@ -2,6 +2,8 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/community.js"></script>
     <script src="../js/button.js"></script>
@@ -27,7 +29,7 @@
   </head>
 
   <body>
-    <img src="../img/CineUniverse.png" alt="CineUniverse" />
+    <img class="logo" src="../img/CineUniverse.png" alt="CineUniverse" />
     <!-- 상단바 -->
     <div class="body_c">
       <ul>
@@ -54,6 +56,10 @@
             id="movie_id"
           />
         </div>
+        <div>
+          <li>영화 포스터</li>
+          <img id="poster_div" style=" width: 100px; height: 150px;" />
+        </div>
         <section class="container-searched-list">
           <strong></strong>
           <ol id="grid-box" class="grid-box"></ol>
@@ -63,13 +69,13 @@
           <textarea
             id="memo"
             name="memo"
-            cols="50"
-            rows="20"
+            cols="40"
+            rows="10"
             required
           ></textarea>
         </li>
         <li>토론 <input id="debate" type="checkbox" name="discussion" /></li>
-        <button id="btn_add_post" onclick="btn_add_post()">작성하기</button>
+        <button id="btn_add_post">작성하기</button>
       </ul>
     </div>
     <div class="v93_30"></div>
