@@ -13,6 +13,16 @@ const searchedList = document.querySelector(".container-searched-list");
 const gridBox = document.querySelector(".grid-box");
 const strong = document.querySelector("strong");
 const searchButton = document.getElementById("search-button");
+const bottom_home = document.getElementById("go_h");
+const bottom_community = document.getElementById("go_c");
+
+bottom_community.onclick = function () {
+  location.href = `http://127.0.0.1:51713/community?id=${db_num}`;
+};
+
+bottom_home.onclick = function () {
+  location.href = `http://127.0.0.1:51713/chart?id=${db_num}`;
+};
 
 //검색 쿼리 저장 객체 생성
 let queryObj = {
@@ -166,7 +176,7 @@ const createSearchedList = (list, compare) => {
     div.appendChild(span);
     //각 영화 요소에 클릭 이벤트 리스너(상세페이지로 이동하는) 추가
     li.addEventListener("click", () => {
-      window.location.href = `../html/searchResult.html?uuid=${db_num}&movieSeq=${orderedResult[i].movieSeq}&movieId=${orderedResult[i].movieId}`;
+      window.location.href = `/searchResult?uuid=${db_num}&movieSeq=${orderedResult[i].movieSeq}&movieId=${orderedResult[i].movieId}`;
     });
   }
 

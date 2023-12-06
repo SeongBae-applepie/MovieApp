@@ -568,6 +568,7 @@ textarea {
   right: 33px;
   width: 25px;
   height: 25px;
+  background: url("../../assets/icons/menu.svg") no-repeat 0 0;
 }
 
 .nav {
@@ -641,7 +642,7 @@ textarea {
   color: #000000;
   font-family: "SpoqaHanSansNeo-Bold", sans-serif;
   font-size: 30px;
-
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

@@ -6,42 +6,48 @@ const db_uuid = urlParams.get("id");
 console.log(db_uuid);
 
 //엘리먼트 가져오기
+const close = document.getElementById("close");
 const post_content = document.getElementById("memo");
 const post_title = document.getElementById("title");
 const post_debate = document.getElementById("debate");
 const searchInput = document.getElementById("input-search");
-const movie_id = document.getElementById("movie_id");
-const btn_add_post = document.getElementById("btn_add_post");
+// const movie_id = document.getElementById("movie_id");
+const btn_add_post = document.getElementById("post_btn");
 const searchedList = document.querySelector(".container-searched-list");
 const gridBox = document.getElementById("grid-box");
 const strong = document.querySelector("strong");
 const poster_div = document.getElementById("poster_div");
 var debate_value = 0;
+var movie_id;
+
+close.onclick = function () {
+  location.href = `http://127.0.0.1:51713/community?id=${db_uuid}`;
+};
 
 post_debate.onclick = function () {
   if (debate_value == 0) {
     debate_value = 1;
+    post_debate.src = "../img/buttonOn.png";
   } else {
     debate_value = 0;
+    post_debate.src = "../img/buttonOff.png";
   }
 
   console.log(debate_value);
 };
 
-btn_add_post.onclick = async function () {
+btn_add_post.onclick = async function btn_update_post_onclick() {
   var post_title_v = post_title.value;
   var post_content_v = post_content.value;
-
-  var post_movie_id_v = movie_id.value;
   var post_movie_name_v = searchInput.value;
-  //생성할때 전달 오브젝트
+  //생성할때 전달 오브젝트ef
   var obj = {
     post_title: post_title_v,
     uuid_users: db_uuid,
     post_content: post_content_v,
     post_debate: debate_value,
     post_movie_name: post_movie_name_v,
-    post_movie_id: post_movie_id_v,
+    post_movie_id: movie_id,
   };
   console.log(obj);
 
@@ -54,7 +60,7 @@ btn_add_post.onclick = async function () {
     body: JSON.stringify(obj),
   });
   console.log(obj);
-  window.location.href = "http://127.0.0.1:51713/post_list?id=" + db_uuid;
+  window.location.href = "http://127.0.0.1:51713/community?id=" + db_uuid;
 };
 
 //검색 쿼리 저장 객체 생성
@@ -206,7 +212,7 @@ const createSearchedList = (list, compare) => {
 
       var ss = e.currentTarget.id.split("|");
       searchInput.value = ss[0];
-      movie_id.value = ss[1];
+      movie_id = ss[1];
       poster_div.src = ss[2];
       gridBox.style.display = "none";
     });

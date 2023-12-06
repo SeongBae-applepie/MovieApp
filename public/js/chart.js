@@ -9,7 +9,7 @@ console.log("users+id");
 console.log(db_num);
 
 const loadingItem = document.querySelectorAll(".loading");
-
+const bottom_community = document.getElementById("go_c");
 const debate_ol = document.getElementById("debate_ol");
 const post_ol = document.getElementById("post_ol");
 const search_i = document.getElementById("search");
@@ -19,7 +19,9 @@ search_i.onclick = function () {
   location.href = `http://127.0.0.1:51713/search?uuid=${db_num}`;
 };
 
-// post_ol
+bottom_community.onclick = function () {
+  location.href = `http://127.0.0.1:51713/community?id=${db_num}`;
+};
 
 // 일별 박스 오피스 값을 넣어 영화 상세 결과값을 얻어내기
 //배열을 받아 영화에 대한 상세 정보 얻기
@@ -58,11 +60,27 @@ const setMovieDetail = async (movie, detailResult) => {
         ? "../image/redfullogo.png"
         : detailResult.posters.split("|")[0];
     li.style.backgroundImage = `url(${poster})`;
+    console.log(poster);
+
+    // 영화 포스터를 이미지 태그로 생성
+    const posterImg = document.createElement("img");
+    posterImg.src = poster;
+    posterImg.alt = "영화 포스터";
+    posterImg.classList.add("movie-poster");
+
+    // 영화 제목을 나타내는 div 엘리먼트 생성 및 설정
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("movie-title");
+    titleDiv.textContent = movie.movieNm;
     //클릭 이벤트 -> 영화 상세 페이지로 이동
     li.addEventListener("click", () => {
       // window.location.href = "http://127.0.0.1:51713/post_list?id=" + uuid;
-      location.href = `http://127.0.0.1:51713/searchResult?movieId=${detailResult.movieId}&movieSeq=${detailResult.movieSeq}`;
+      location.href = `http://127.0.0.1:51713/searchResult?movieId=${detailResult.movieId}&movieSeq=${detailResult.movieSeq}&uuid=${db_num}`;
     });
+
+    // li 엘리먼트에 영화 포스터와 영화 제목을 추가
+    li.appendChild(posterImg);
+    li.appendChild(titleDiv);
   }
 };
 

@@ -129,7 +129,7 @@ const showValue = (movie) => {
   if (poster_str !== "") {
     poster.src = poster_str;
   } else {
-    poster.src = "../image/redlogo.png";
+    poster.src = "../img/redlogo.png";
   }
 
   const stll_str =
@@ -139,7 +139,7 @@ const showValue = (movie) => {
   if (stll_str !== "") {
     stll.src = stll_str;
   } else {
-    stll.src = "../image/redlogo.png";
+    stll.src = "../img/redlogo.png";
   }
 
   //개봉일
@@ -217,20 +217,6 @@ function score(num) {
     return 4;
   } else if (num == 1) {
     return 5;
-  }
-}
-
-function re_score(num) {
-  if (num == 1) {
-    return 9;
-  } else if (num == 2) {
-    return 7;
-  } else if (num == 3) {
-    return 5;
-  } else if (num == 4) {
-    return 3;
-  } else if (num == 5) {
-    return 1;
   }
 }
 

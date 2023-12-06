@@ -3,14 +3,13 @@ const urlParams = new URL(location.href).searchParams;
 const db_uuid = urlParams.get("id");
 console.log(db_uuid);
 //create Textfield
-const user_id = document.getElementById("users");
+
 const post_conent = document.getElementById("memo");
 const post_title = document.getElementById("title");
 const post_debate = document.getElementById("debate");
 const post_movie_id = document.getElementById("movie_name");
 const post_movie_name = document.getElementById("movie_id");
 //movie_select
-user_id.innerText = db_uuid;
 
 //post btn
 const btn_add_posd = document.getElementById("post_btn");
@@ -36,7 +35,7 @@ function btn_update_post_onclick() {
     post_movie_name: post_movie_name_v,
     post_movie_id: post_movie_id_v,
   };
-
+  console.log();
   // //fetch 로 nodejs Post 값 전달.
   // fetch("http://127.0.0.1:51713/insert_post", {
   //   method: "POST",

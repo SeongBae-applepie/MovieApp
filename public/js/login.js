@@ -113,8 +113,8 @@ fetch("http://127.0.0.1:51713/get_users")
       btn_p.onclick = function (e) {
         var uuid = e.target.id;
         console.log(uuid);
-        window.location.href = "http://127.0.0.1:51713/chart?id=" + uuid;
-        // window.location.href = "http://127.0.0.1:51713/post_list?id=" + uuid;
+        // window.location.href = "http://127.0.0.1:51713/chart?id=" + uuid;
+        window.location.href = "http://127.0.0.1:51713/post_list?id=" + uuid;
       };
     }
   })

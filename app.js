@@ -17,35 +17,42 @@ app.use(express.static(path.join("./public")));
 
 var port = 51713;
 
+//home
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/public/html/home.html");
 });
-
+//db
 app.get("/db", function (req, res) {
   res.sendFile(__dirname + "/public/html/db.html");
 });
 
+//api ex
 app.get("/api", function (req, res) {
   res.sendFile(__dirname + "/public/html/api.html");
 });
 
+//api_p
 app.get("/api_p", function (req, res) {
   res.sendFile(__dirname + "/public/html/api_poster.html");
 });
 
+//home wbs
 app.get("/wbs", function (req, res) {
   res.sendFile(__dirname + "/public/html/wbs.html");
 });
 
+//demo
 app.get("/demo", function (req, res) {
   res.sendFile(__dirname + "/public/html/demo.html");
   // res.end(__dirname+"/public/src/db.PNG")
 });
 
+//crud ex
 app.get("/crud", function (req, res) {
   res.sendFile(__dirname + "/public/html/login.html");
 });
 
+//homeview
 app.get("/homeview", function (req, res) {
   res.sendFile(__dirname + "/public/html/home_view.html");
 });
@@ -78,30 +85,35 @@ app.get("/post_list", function (request, response) {
   });
 });
 
+//post_page
 app.get("/post_page", function (request, response) {
   fs.readFile("./public/html/post_page.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
+//note
 app.get("/note", function (request, response) {
   fs.readFile("./public/html/note.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
+//홈 화면
 app.get("/chart", function (request, response) {
   fs.readFile("./public/html/chart.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
+//검색 화면
 app.get("/search", function (request, response) {
   fs.readFile("./public/html/search.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
+//검색 결과
 app.get("/searchResult", function (request, response) {
   fs.readFile(
     "./public/html/searchResult.html",
@@ -112,22 +124,31 @@ app.get("/searchResult", function (request, response) {
   );
 });
 
+//login_page
 app.get("/login2", function (request, response) {
   fs.readFile("./public/html/login2.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
 
+//회원가입
 app.get("/join", function (request, response) {
   fs.readFile("./public/html/join.html", "utf8", function (error, data) {
     response.send(data);
   });
 });
+
+//커뮤티니
+app.get("/community", function (request, response) {
+  fs.readFile("./public/html/community.html", "utf8", function (error, data) {
+    response.send(data);
+  });
+});
+
 //  ------------------------- get.html ^ -------------------------------------------------
 //글 전체 가져오기
 app.get("/get_all_post", function (req, res) {
   console.log("Post_C");
-
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결.appendChild();
   var sql = "select * from users_post";
@@ -143,6 +164,7 @@ app.get("/get_all_post", function (req, res) {
 
 //댓글 가져오기 가져오기
 app.get("/get_id_comment", function (req, res) {
+  console.log("get_comment");
   words = req._parsedOriginalUrl.query;
   var words = words.split("=%20");
   uuid_post = words[1];
@@ -162,6 +184,7 @@ app.get("/get_id_comment", function (req, res) {
 
 //글 id값 가져오기
 app.get("/get_id_post", function (req, res) {
+  console.log("get_id_post");
   words = req._parsedOriginalUrl.query;
   var words = words.split("=");
   post_uuid = words[1];
@@ -195,9 +218,9 @@ app.get("/get_users", function (req, res) {
   conn.end();
 });
 
+//토론글 가져오기
 app.get("/get_debate_post", function (req, res) {
   console.log("Post_D_get");
-
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결.appendChild();
   var sql = "select * from users_post where post_debate = 1";
@@ -211,9 +234,9 @@ app.get("/get_debate_post", function (req, res) {
   conn.end();
 });
 
+//핫 게시글 가져오기
 app.get("/get_hot_post", function (req, res) {
   console.log("Post_H_get");
-
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결.appendChild();
   var sql =
@@ -228,6 +251,31 @@ app.get("/get_hot_post", function (req, res) {
   conn.end();
 });
 
+//토론글 가져오기
+app.get("/get_uuid_users_name", function (req, res) {
+  console.log("get_uuid_users");
+
+  words = req._parsedOriginalUrl.query;
+  console.log(words);
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결.appendChild();
+  // var sql = `select * from users where uuid_users="${words}"`;
+  var sql = `SELECT users.name, users_post.post_content, users_post.uuid_post,users_post.post_title,users_post.post_create_date, users_post.uuid_users
+FROM users_post JOIN users
+ON  users.uuid_users = users_post.uuid_users;`;
+  // STRING_AGG('합칠컬럼명', '구분자' ) WITHIN GROUP(ORDER BY '컬럼명')
+
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+    res.send(rows);
+  });
+  conn.end();
+});
+
+//영화 좋아요
 app.get("/get_users_movie_like", function (req, res) {
   words = req._parsedOriginalUrl.query;
   uuid_users = words.split("|")[0];
@@ -275,26 +323,21 @@ app.get("/get_login", function (req, res) {
 //사용자 생성 post
 app.post("/insert_users", function (req, res) {
   console.log("Post_C");
-  // var uuid = req.body.uuiid;
-  // var id = req.body.id;
-  // var passwd = req.body.passwd;
-  // var name = req.body.name;
-  // var create_date = req.body.create_date;
   console.log(req.body);
 
-  // const conn = mysql.createConnection(dbconfig);
-  // conn.connect(); // mysql과 연결
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
 
-  // var sql = `INSERT INTO users (id, passwd, name) VALUE ('${id}','${passwd}','${name}')`;
+  var sql = `INSERT INTO users (id, passwd, name) VALUE ('${req.body.id}','${req.body.passwd}','${req.body.name}')`;
 
-  // conn.query(sql, function (err, rows, fields) {
-  //   if (err) {
-  //     console.error("error connecting: " + err.stack);
-  //   }
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
 
-  //   res.send(rows);
-  // });
-  // conn.end();
+    res.send(rows);
+  });
+  conn.end();
 });
 
 //사용자 삭제 post
@@ -360,10 +403,11 @@ app.post("/update_p", function (req, res) {
 //글 생성 post
 app.post("/insert_post", function (req, res) {
   console.log("Post_insert");
+  console.log(req.body);
 
   var post_title = req.body.post_title;
   var uuid_users = req.body.uuid_users;
-  var post_content = req.body.post_conent;
+  var post_content = req.body.post_content;
   var post_debate = req.body.post_debate;
 
   var post_movie_name = req.body.post_movie_name;
@@ -523,9 +567,12 @@ app.post("/update_users_movie_list_like", function (req, res) {
 });
 
 app.post("/update_users_movie_list_star", function (req, res) {
+  console.log("stars");
+  console.log(req.body);
   const conn = mysql.createConnection(dbconfig);
+
   conn.connect(); // mysql과 연결
-  var sql = `UPDATE users_movie_list SET movie_star = ${req.body.movie_star} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = "${req.body.movie_id}" `;
+  var sql = `UPDATE users_movie_list SET movie_star =${req.body.movie_star} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = ${req.body.movie_id} `;
   conn.query(sql, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);
