@@ -111,6 +111,18 @@ app.get("/searchResult", function (request, response) {
     }
   );
 });
+
+app.get("/login2", function (request, response) {
+  fs.readFile("./public/html/login2.html", "utf8", function (error, data) {
+    response.send(data);
+  });
+});
+
+app.get("/join", function (request, response) {
+  fs.readFile("./public/html/join.html", "utf8", function (error, data) {
+    response.send(data);
+  });
+});
 //  ------------------------- get.html ^ -------------------------------------------------
 //글 전체 가져오기
 app.get("/get_all_post", function (req, res) {
@@ -235,30 +247,54 @@ app.get("/get_users_movie_like", function (req, res) {
   conn.end();
 });
 
+//글 id값 가져오기
+app.get("/get_login", function (req, res) {
+  words = req._parsedOriginalUrl.query;
+  console.log(words);
+  var words = words.split("|");
+  id = words[0];
+  passwd = words[1];
+  console.log(id);
+  console.log(passwd);
+
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결.appendChild();
+
+  var sql = `select * from users WHERE id = "${id}" and passwd="${passwd}"`;
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+    res.send(rows);
+  });
+  conn.end();
+});
+
 //  ------------------------- get.sql ^ -------------------------------------------------
 
 //사용자 생성 post
 app.post("/insert_users", function (req, res) {
   console.log("Post_C");
-  var uuid = req.body.uuiid;
-  var id = req.body.id;
-  var passwd = req.body.passwd;
-  var name = req.body.name;
-  var create_date = req.body.create_date;
+  // var uuid = req.body.uuiid;
+  // var id = req.body.id;
+  // var passwd = req.body.passwd;
+  // var name = req.body.name;
+  // var create_date = req.body.create_date;
+  console.log(req.body);
 
-  const conn = mysql.createConnection(dbconfig);
-  conn.connect(); // mysql과 연결
+  // const conn = mysql.createConnection(dbconfig);
+  // conn.connect(); // mysql과 연결
 
-  var sql = `INSERT INTO users (id, passwd, name) VALUE ('${id}','${passwd}','${name}')`;
+  // var sql = `INSERT INTO users (id, passwd, name) VALUE ('${id}','${passwd}','${name}')`;
 
-  conn.query(sql, function (err, rows, fields) {
-    if (err) {
-      console.error("error connecting: " + err.stack);
-    }
+  // conn.query(sql, function (err, rows, fields) {
+  //   if (err) {
+  //     console.error("error connecting: " + err.stack);
+  //   }
 
-    res.send(rows);
-  });
-  conn.end();
+  //   res.send(rows);
+  // });
+  // conn.end();
 });
 
 //사용자 삭제 post
