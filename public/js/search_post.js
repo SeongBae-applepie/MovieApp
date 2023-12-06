@@ -2,17 +2,60 @@ import { getSearchResult } from "../api/movieApi.js";
 
 const urlParams = new URL(location.href).searchParams;
 
-const db_num = urlParams.get("uuid");
-
-console.log("users+id");
-console.log(db_num);
+const db_uuid = urlParams.get("id");
+console.log(db_uuid);
 
 //엘리먼트 가져오기
+const post_content = document.getElementById("memo");
+const post_title = document.getElementById("title");
+const post_debate = document.getElementById("debate");
 const searchInput = document.getElementById("input-search");
+const movie_id = document.getElementById("movie_id");
+const btn_add_post = document.getElementById("btn_add_post");
 const searchedList = document.querySelector(".container-searched-list");
-const gridBox = document.querySelector(".grid-box");
+const gridBox = document.getElementById("grid-box");
 const strong = document.querySelector("strong");
-const searchButton = document.getElementById("search-button");
+const poster_div = document.getElementById("poster_div");
+var debate_value = 0;
+
+post_debate.onclick = function () {
+  if (debate_value == 0) {
+    debate_value = 1;
+  } else {
+    debate_value = 0;
+  }
+
+  console.log(debate_value);
+};
+
+btn_add_post.onclick = async function () {
+  var post_title_v = post_title.value;
+  var post_content_v = post_content.value;
+
+  var post_movie_id_v = movie_id.value;
+  var post_movie_name_v = searchInput.value;
+  //생성할때 전달 오브젝트
+  var obj = {
+    post_title: post_title_v,
+    uuid_users: db_uuid,
+    post_content: post_content_v,
+    post_debate: debate_value,
+    post_movie_name: post_movie_name_v,
+    post_movie_id: post_movie_id_v,
+  };
+  console.log(obj);
+
+  //fetch 로 nodejs Post 값 전달.
+  await fetch("http://127.0.0.1:51713/insert_post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+  console.log(obj);
+  window.location.href = "http://127.0.0.1:51713/post_list?id=" + db_uuid;
+};
 
 //검색 쿼리 저장 객체 생성
 let queryObj = {
@@ -57,17 +100,9 @@ async function search(searchInputValue, startCount = 0) {
   }
 }
 
-searchInput === null || searchInput === void 0
-  ? void 0
-  : searchButton.addEventListener("click", () => {
-      // 검색어가 빈 문자열이 아닌 경우(유효) 함수 호출
-      if (searchInput.value !== "" && searchInput.value.trim() !== "") {
-        search(searchInput.value);
-      }
-    });
-
 //검색 결과 받아와 화면에 표시하는 함수
 const createSearchedList = (list, compare) => {
+  gridBox.style.display = "block";
   //검색 결과 정의되지 않았다면 함수 종료
   if (list.Result === undefined) return;
 
@@ -120,53 +155,60 @@ const createSearchedList = (list, compare) => {
   //완전 일치 - 부분 일치 - 불일치 순으로 정렬된 배열 생성
   //최종 필터링 결과
   const orderedResult = allMatched.concat(someMatched, notMatched);
-
-  //최종 결과 배열 순회하면서 각 항목에 표시할 HTML 요소 만들기
-  for (let i = 0; i < orderedResult.length; i++) {
+  // 최종 결과 배열 순회하면서 각 항목에 표시할 HTML 요소 만들기
+  for (let i = 0; i < Math.min(20, orderedResult.length); i++) {
+    // 상위 20개만 출력하도록 수정
     const li = document.createElement("li");
-    const containerPoster = document.createElement("div");
-    const posterImg = document.createElement("img");
     const div = document.createElement("div");
+    const releaseDate = document.createElement("span");
     const span = document.createElement("span");
-    li.classList.add("searched-movie");
-    containerPoster.classList.add("container-poster");
+    const p_sp = document.createElement("img");
+    // li.classList.t("searched-movie");
+    li.setAttribute("class", "searched-movie");
+    var li_id = orderedResult[i].title + "|" + orderedResult[i].movieSeq;
 
-    //포스터 이미지 설정
-    //속성 비어 있지 않다면 경로를 src 속성으로 설정
-    const poster_str =
+    const poster =
       orderedResult[i].posters.split("|")[0] === ""
-        ? ""
+        ? "../assets/images/post_default.jpg"
         : orderedResult[i].posters.split("|")[0];
 
-    if (poster_str !== "") {
-      posterImg.setAttribute("src", orderedResult[i].posters.split("|")[0]);
-    } else {
-      posterImg.setAttribute("src", "../image/redlogo.png");
-    }
+    var li_id =
+      orderedResult[i].title + "|" + orderedResult[i].movieSeq + "|" + poster;
+    li.setAttribute("id", li_id);
 
-    //생성된 요소에 클래스 추가
-    posterImg.classList.add("img-poster");
+    // 이미지 관련 코드 삭제
+    // 포스터 이미지 설정
+    // 속성 비어 있지 않다면 경로를 src 속성으로 설정
+
     div.classList.add("title-box");
     span.classList.add("movie-title");
-
-    //검색어와 일치 부분 강조 위해
-    //strong 태그로 감싼 HTML 생성
+    releaseDate.textContent = ` ${orderedResult[i].prodYear}년`;
+    // 검색어와 일치 부분 강조 위해
+    // strong 태그로 감싼 HTML 생성
     const filteredTitle = orderedResult[i].title.replace(
       searchInput.value,
       `<strong style="color:#FF5F5F">${searchInput.value}</strong>`
     );
-    //제목에 삽입
+    // 제목에 삽입
     span.insertAdjacentHTML("afterbegin", filteredTitle);
-
-    //요소들을 DOM에 추가
+    p_sp.src = poster;
+    li.style.border = "1px solid black";
+    li.style.margin = "5px";
+    // 요소들을 DOM에 추가
     fragment.appendChild(li);
-    li.appendChild(containerPoster);
-    containerPoster.appendChild(posterImg);
     li.appendChild(div);
     div.appendChild(span);
-    //각 영화 요소에 클릭 이벤트 리스너(상세페이지로 이동하는) 추가
-    li.addEventListener("click", () => {
-      window.location.href = `../html/searchResult.html?uuid=${db_num}&movieSeq=${orderedResult[i].movieSeq}&movieId=${orderedResult[i].movieId}`;
+    div.appendChild(releaseDate);
+    div.appendChild(p_sp);
+    // 각 영화 요소에 클릭 이벤트 리스너(상세페이지로 이동하는) 추가
+    li.addEventListener("click", (e) => {
+      //movieSeq
+
+      var ss = e.currentTarget.id.split("|");
+      searchInput.value = ss[0];
+      movie_id.value = ss[1];
+      poster_div.src = ss[2];
+      gridBox.style.display = "none";
     });
   }
 
@@ -222,7 +264,12 @@ const createObserver = (element) => {
         //새로운 영화 검색 결과 얻어오는 함수(여러 영화 검색) 결과 가져오기
         const newSearchList = await getSearchResult(queryObj);
         //새로운 검색 결과 없으면 함수 종료
-        if (newSearchList.Result.length === 0) return;
+        if (
+          newSearchList &&
+          newSearchList.Result &&
+          newSearchList.Result.length === 0
+        )
+          return;
         //새로운 검색 결과를 이전 결과에 추가
         createSearchedList(newSearchList, true);
 
@@ -239,7 +286,11 @@ const createObserver = (element) => {
         //다음 Infinite scrolling에 대비하여 startCount를 100 증가
         startCount += 100;
         //가져온 검색 결과가 100개보다 적다면 Intersection Observer를 중단
-        if (newSearchList.Result.length < 100) {
+        if (
+          newSearchList &&
+          newSearchList.Result &&
+          newSearchList.Result.length < 100
+        ) {
           observer.disconnect();
         }
       }
@@ -257,3 +308,9 @@ const createObserver = (element) => {
 };
 //Infinite scrolling -> 추가 검색 결과를 가져와
 //화면에 동적으로 추가하는 기능을 구현하는 함수
+
+// const post_conent = document.getElementById("memo");
+// const post_title = document.getElementById("title");
+// const post_debate = document.getElementById("debate");
+// const searchInput = document.getElementById("input-search");
+// const movie_id = document.getElementById("movie_id");

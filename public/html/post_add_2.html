@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/community.js"></script>
-    <script src="../js/button.js"></script>
+    <!-- <script src="../js/community.js"></script>
+    <script src="../js/button.js"></script> -->
     <link
       href="https://fonts.googleapis.com/css?family=Inter&display=swap"
       rel="stylesheet"
@@ -27,7 +27,7 @@
   </head>
 
   <body>
-    <img src="../img/CineUniverse.png" alt="CineUniverse" />
+    <img class="logo" src="../img/CineUniverse.png" alt="CineUniverse" />
     <!-- 상단바 -->
     <div class="body_c">
       <ul>
@@ -54,6 +54,11 @@
             id="movie_id"
           />
         </div>
+        <div>
+          <li>영화 포스터</li>
+          <img id="poster_div" />
+        </div>
+
         <section class="container-searched-list">
           <strong></strong>
           <ol id="grid-box" class="grid-box"></ol>
@@ -64,11 +69,14 @@
             id="memo"
             name="memo"
             cols="50"
-            rows="20"
+            rows="10"
             required
           ></textarea>
         </li>
-        <li>토론 <input id="debate" type="checkbox" name="discussion" /></li>
+        <li>
+          토론
+          <input id="debate" type="checkbox" name="discussion" />
+        </li>
         <button id="btn_add_post" onclick="btn_add_post()">작성하기</button>
       </ul>
     </div>
@@ -100,6 +108,6 @@
         </a>
       </div>
     </div>
-    <script type="module" src="../js/search.js"></script>
+    <script type="module" src="../js/search_post.js"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 const urlParams = new URL(location.href).searchParams;
 
 const db_num = urlParams.get("id");
+console.log(db_num);
 var words = db_num.split("|");
 uuid_post_user = words[1];
 uuid_post_s = words[0];
@@ -8,11 +9,27 @@ uuid_login_s = words[2];
 uuid_post = uuid_post_s.split(" ").join("");
 uuid_login = uuid_login_s.split(" ").join("");
 
+window.addEventListener("load", post_views());
+
 //commet btn
 const btn_add_comment = document.getElementById("comment_btn");
 const li_add_comment = document.getElementById("memo");
 const ol_list_comment = document.getElementById("comment_list");
 //comment_list
+
+function post_views() {
+  obj = {
+    uuid_post: uuid_post,
+  };
+
+  fetch("http://127.0.0.1:51713/views_post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(obj),
+  });
+}
 
 //댓글 추가
 btn_add_comment.onclick = function () {

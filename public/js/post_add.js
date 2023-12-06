@@ -25,6 +25,8 @@ function btn_update_post_onclick() {
   var post_movie_id_v = post_movie_id.value;
   var post_movie_name_v = post_movie_name.value;
 
+  console.log(post_debate_v);
+
   //생성할때 전달 오브젝트
   var obj = {
     post_title: post_title_v,
@@ -35,63 +37,63 @@ function btn_update_post_onclick() {
     post_movie_id: post_movie_id_v,
   };
 
-  //fetch 로 nodejs Post 값 전달.
-  fetch("http://127.0.0.1:51713/insert_post", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(obj),
-  });
+  // //fetch 로 nodejs Post 값 전달.
+  // fetch("http://127.0.0.1:51713/insert_post", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(obj),
+  // });
 
-  window.location.href = "http://127.0.0.1:51713/post_list?id=" + db_uuid;
+  // window.location.href = "http://127.0.0.1:51713/post_list?id=" + db_uuid;
 }
 
-//sql 에서 값 가져오기
-fetch("http://127.0.0.1:51713/get_post")
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    //data (nodejs Get 값)
-    //동적으로 list 생성
-    for (var i = 0; i < data.length; i++) {
-      //list, btn 객체 생성
-      const li = document.createElement("li");
-      const btn_d = document.createElement("button");
-      const btn_u = document.createElement("button");
-      const btn_p = document.createElement("button");
+// //sql 에서 값 가져오기
+// fetch("http://127.0.0.1:51713/get_post")
+//   .then((res) => {
+//     return res.json();
+//   })
+//   .then((data) => {
+//     //data (nodejs Get 값)
+//     //동적으로 list 생성
+//     for (var i = 0; i < data.length; i++) {
+//       //list, btn 객체 생성
+//       const li = document.createElement("li");
+//       const btn_d = document.createElement("button");
+//       const btn_u = document.createElement("button");
+//       const btn_p = document.createElement("button");
 
-      //객체 Id 값 설정
-      li.setAttribute("id", i);
-      btn_d.setAttribute("id", data[i].uuid_users);
-      btn_u.setAttribute("id", i);
-      btn_p.setAttribute("id", data[i].uuid_users);
+//       //객체 Id 값 설정
+//       li.setAttribute("id", i);
+//       btn_d.setAttribute("id", data[i].uuid_users);
+//       btn_u.setAttribute("id", i);
+//       btn_p.setAttribute("id", data[i].uuid_users);
 
-      //객체 Text값 설정
-      const textNode = document.createTextNode(
-        "uuid : " +
-          data[i].uuid_users +
-          "id : " +
-          data[i].id +
-          "passwd :" +
-          data[i].passwd +
-          " 이름 : " +
-          data[i].name +
-          "생성날짜 :" +
-          data[i].create_date
-      );
+//       //객체 Text값 설정
+//       const textNode = document.createTextNode(
+//         "uuid : " +
+//           data[i].uuid_users +
+//           "id : " +
+//           data[i].id +
+//           "passwd :" +
+//           data[i].passwd +
+//           " 이름 : " +
+//           data[i].name +
+//           "생성날짜 :" +
+//           data[i].create_date
+//       );
 
-      //list text append
-      li.appendChild(textNode);
-      btn_d.appendChild(textbtn_d);
-      btn_u.appendChild(textbtn_u);
-      btn_p.appendChild(textbtn_p);
+//       //list text append
+//       li.appendChild(textNode);
+//       btn_d.appendChild(textbtn_d);
+//       btn_u.appendChild(textbtn_u);
+//       btn_p.appendChild(textbtn_p);
 
-      //LiSt 에 값 할당
-      document.getElementById("comment_list").appendChild(li);
-    }
-  })
-  .catch((err) => {
-    console.log("er", err);
-  });
+//       //LiSt 에 값 할당
+//       document.getElementById("comment_list").appendChild(li);
+//     }
+//   })
+//   .catch((err) => {
+//     console.log("er", err);
+//   });
