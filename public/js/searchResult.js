@@ -13,6 +13,7 @@ const rating = document.querySelector(".rating");
 const summary = document.querySelector(".movie-summary>dd");
 var like_mo;
 var title_mo;
+var star_mo;
 var chaeck_users;
 let chaeck_num = 999999;
 
@@ -69,6 +70,8 @@ function visit_user(title_mo2) {
         // insert_user_list(obj);
       } else {
         chaeck_users = chaeck_num;
+        star_mo = data[0].movie_star;
+        teststar.innerText = star_mo + "⭐";
         console.log(data[0].movie_like);
         if (data[0].movie_like != 1) {
           labelHeart.classList.toggle("select", (btnHeart.checked = false));
@@ -238,13 +241,13 @@ async function send_star_db(result) {
     movie_id: movieSeq,
     movie_name: title_mo,
     movie_star: result,
-    movie_like: 1,
+    movie_like: like_mo,
     uuid_users: uuid,
   };
 
   console.log(oj);
 
-  fetch("http://127.0.0.1:51713/insert_comment", {
+  fetch("http://127.0.0.1:51713/update_users_movie_list_star", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -267,7 +270,6 @@ containers.forEach((container) => {
     const nodes = [...container.children];
     //현재 마우스 이벤트가 발생한 요소의 인덱스 찾기
     const index = nodes.indexOf(e.target);
-
     //현재 이벤트가 I 태그(별점 아이콘)인지 확인
     if (e.target.nodeName === "I") {
       //현재 마우스 위치의 인덱스가 이전에 저장된 인덱스와 다를 경우
@@ -310,16 +312,12 @@ containers.forEach((container) => {
 
   //클릭 이벤트에 대한 이벤트 리스너
   container.addEventListener("click", (e) => {
-    console.log("C!!");
     //클릭 이벤트가 발생한 시점에서 요소의 자식들 배열로 저장
     const nodes = [...container.children];
     //클릭된 지점의 인덱스 찾기
     const index = nodes.indexOf(e.target);
-    console.log("in");
-    console.log(index);
+
     result = score(index);
-    console.log("re");
-    console.log(result);
 
     send_star_db(result);
     teststar.innerText = result + "⭐";

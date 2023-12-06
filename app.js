@@ -472,13 +472,24 @@ app.post("/update_users_movie_list_like_update", function (req, res) {
 });
 
 app.post("/update_users_movie_list_like", function (req, res) {
-  var uuid_users = req.body.uuid_users;
-  var movie_id = req.body.movie_id;
-  var movie_star = req.body.movie_star;
+  console.log(req.body);
 
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
-  var sql = `UPDATE users_movie_list WHERE uuid_users = "${uuid_users}" AND movie_id = "${movie_id}" SET movie_star=${movie_star}`;
+  var sql = `UPDATE users_movie_list SET movie_like = ${req.body.movie_like} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = "${req.body.movie_id}" `;
+  conn.query(sql, function (err, rows, fields) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+    }
+    res.send(rows);
+  });
+  conn.end();
+});
+
+app.post("/update_users_movie_list_star", function (req, res) {
+  const conn = mysql.createConnection(dbconfig);
+  conn.connect(); // mysql과 연결
+  var sql = `UPDATE users_movie_list SET movie_star = ${req.body.movie_star} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = "${req.body.movie_id}" `;
   conn.query(sql, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);
