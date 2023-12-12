@@ -1,0 +1,126 @@
+.navbar .nav-link img {
+    width: 25px;
+    height: 25px;
+  }
+  .navbar .nav-link span {
+    font-size: 10px;
+  }
+  .userData {
+    position: relative;
+    height: auto;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    border: 10px solid rgb(248, 247, 247);
+    overflow: hidden;
+    margin-top: 3%;
+    margin-left: 3%;
+  }
+  .userData .circle {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: chartreuse;
+    border-radius: 50%;
+    margin-left: 1%;
+    transform: translate(0, 0);
+  }
+  .userData table {
+    margin-left: 10%;
+  }
+  @media (max-width: 600px) {
+    .userData table {
+      margin-left: 15%;
+    }
+  }
+  
+  /* 화면 너비가 1200px 이상일 때 */
+  @media (min-width: 1200px) {
+    .userData table {
+      margin-left: 5%;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+  .title {
+    font-size: 15px;
+  }
+  .back {
+    margin-top: 25%;
+    margin-left: 5%;
+  }
+  .box {
+    position: relative;
+    height: 10vh;
+    border-bottom: 1px solid #b7b7b7ff;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .zemok {
+    position: absolute;
+    bottom: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .movieData {
+    width: 95%;
+    height: auto;
+    background-color: gainsboro;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border: 1px solid rgb(248, 247, 247);
+    border-radius: 10px; /* 모서리를 둥글게 */
+    margin: 0 auto;
+  }
+  .movieData table {
+    margin-left: 12%;
+  }
+  @media (min-width: 600px) {
+    .movieData table {
+      margin-left: 15%;
+    }
+  }
+  @media (min-width: 900px) {
+    .movieData table {
+      margin-left: 20%;
+    }
+  }
+  .movieData .example {
+    position: absolute;
+    width: 10%;
+    height: 20%;
+    margin-left: 1%;
+    transform: translate(0, 0);
+  }
+  @media (min-width: 900px) {
+    .movieData .example {
+      width: 15%;
+      height: 30%;
+    }
+  }
+  .box2 {
+    position: relative;
+    height: auto;
+    border-bottom: 1px solid #b7b7b7ff;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .box3 {
+    display: flex; /* 이미지를 같은 행에 놓기 위해 가로로 배치*/
+    position: relative;
+    height: auto;
+    border-bottom: 1px solid #b7b7b7ff;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .box3 .item:last-child {
+    margin-left: auto; /* box3의 마지막 자식 share 우측정렬*/
+  }
+  .comments {
+    padding-bottom: 20%;
+  }
+  

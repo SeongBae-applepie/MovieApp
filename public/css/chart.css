@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'SpoqaHanSansNeo-Regular';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpoqaHanSansNeo-Medium';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Medium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpoqaHanSansNeo-Bold';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container-chart {
+
+  padding: 5% 1%;
+}
+
+.text-charttitle {
+  position: relative;
+}
+.page-title {
+  color: black;
+  font-family: "SpoqaHanSansNeo-Bold", sans-serif;
+  font-size: 30px;
+  text-align: left;
+}
+
+
+.card-m {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+
+
+
+.loading {
+  background-image: none;
+  background-color: #e0e0e0;
+  -webkit-animation: blinker 1s linear infinite;
+          animation: blinker 1s linear infinite;
+}
+
+
+
+
+
+.wrapper-card {
+  display: flex;
+  /* Flexbox를 사용하여 자식 요소를 수평으로 배치 */
+
+
+}
+/* 특정 클래스를 가진 .wrapper-card에 적용되는 추가 스타일 */
+.wrapper-card.chart {
+  display: grid;
+  /*  Grid 레이아웃을 사용하여 자식 요소를 배치 */
+  grid-auto-flow: column;
+  /* 자동으로 컬럼 방향으로 배치 */
+  gap: 8px;
+  /* 그리드 아이템 사이의 간격 */
+
+  overflow: auto;
+}
+
+/* Card Styles */
+.card-m img{
+
+  border-radius: 5px;
+  /* 테두리를 둥글게 설정. */
+}
+
+

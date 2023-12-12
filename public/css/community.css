@@ -1,35 +1,39 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.navbar .nav-link img {
+  width: 25px;
+  height: 25px;
 }
-body {
-    width: 390px;
-    height: 844px;
-    margin: 0 auto; /* 페이지 중앙에 위치시키기 위해 사용 */
-    overflow: auto; /* 내용이 body의 크기를 넘어갈 경우 스크롤바 표시 */
+.navbar .nav-link span {
+  font-size: 10px;
 }
-.v93_30 {
-  width: 390px;
-  background: url("../images/v93_30.png");
+.top-line {
+  border-top: 1px solid #000;
+}
+.nav-link.square {
+  width: 84px;
+  height: 32px;
+  color: black;
+  background: rgba(217, 217, 217, 1);
   opacity: 1;
-  position: absolute;
-  top: 146px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  border: 1px solid rgba(217,217,217,1);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  margin-right: 5px;
+  text-decoration: none; /* 밑줄 제거 */
 }
-.v93_41{
-  width: 390px;
+.v93_41 {
   height: auto;
   background-color: white;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   opacity: 1;
-  position: absolute;
-  top: 180px;
+  top: 150px;
   left: 0;
   right: 0;
   margin: auto;
@@ -37,23 +41,21 @@ body {
   overflow: hidden;
 }
 .v93_42 {
-  width: 390px;
   height: auto;
   background-color: gainsboro;
   background-repeat: no-repeat;
-  background-position: center center; 
+  background-position: center center;
   background-size: cover;
-  position: absolute;
-  top: 180px;
+  top: 150px;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   border: 1px solid rgb(248, 247, 247);
   border-radius: 10px; /* 모서리를 둥글게 */
   overflow: hidden;
 }
 .post-card-41 {
-  width: 90%;
+  position: relative;
   height: auto;
   background-color: white;
   background-repeat: no-repeat;
@@ -64,8 +66,32 @@ body {
   overflow: hidden;
   margin-bottom: 10px; /* 각 카드 사이의 간격 조정 */
 }
+.post-card-41 table {
+  margin-left: 10%;
+}
+@media (max-width: 600px) {
+  .post-card-41 table {
+    margin-left: 15%;
+  }
+}
+
+/* 화면 너비가 1200px 이상일 때 */
+@media (min-width: 1200px) {
+  .post-card-41 table {
+    margin-left: 5%;
+  }
+}
+.post-card-41 .circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 50%;
+  margin-left: 1%;
+  transform: translate(0, 0);
+}
+
 .post-card-42 {
-  width: 90%;
   height: auto;
   background-color: gainsboro;
   background-repeat: no-repeat;
@@ -74,19 +100,17 @@ body {
   border: 1px solid rgb(248, 247, 247);
   border-radius: 10px; /* 모서리를 둥글게 */
   overflow: hidden;
+  margin: 0 auto;
   margin-bottom: 20px; /* 각 카드 사이의 간격 조정 */
 }
 .combined-card {
   margin-bottom: 0; /* 각 카드 사이의 간격 조정 */
 }
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-h1 {
-  font-size: 9px;
+
+#write-button {
+  position: fixed;
+  top: 80%;
+  left: 85%;
+  width: 40px;
+  height: 40px;
 }

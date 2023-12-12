@@ -1,15 +1,14 @@
 const urlParams = new URL(location.href).searchParams;
 
 const db_uuid = urlParams.get("id");
+console.log(db_uuid);
 //create Textfield
-const user_id = document.getElementById("users");
-const post_content = document.getElementById("memo");
+
+const post_conent = document.getElementById("memo");
 const post_title = document.getElementById("title");
 const post_debate = document.getElementById("debate");
 const post_movie_id = document.getElementById("movie_name");
 const post_movie_name = document.getElementById("movie_id");
-//movie_select
-user_id.innerText = db_uuid;
 
 //post btn
 const btn_add_posd = document.getElementById("post_btn");
@@ -19,22 +18,24 @@ const btn_add_comment = document.getElementById("comment_btn");
 //create btn onclic
 function btn_update_post_onclick() {
   var post_title_v = post_title.value;
-  var post_content_v = post_content.value;
+  var post_conent_v = post_conent.value;
   var post_debate_v = post_debate.value;
   var post_movie_id_v = post_movie_id.value;
   var post_movie_name_v = post_movie_name.value;
+
+  console.log(post_debate_v);
 
   //생성할때 전달 오브젝트
   var obj = {
     post_title: post_title_v,
     uuid_users: db_uuid,
-    post_content: post_content_v,
+    post_conent: post_conent_v,
     post_debate: post_debate_v,
     post_movie_name: post_movie_name_v,
     post_movie_id: post_movie_id_v,
-  };
-  console.log(db_uuid);
 
+  };
+  console.log();
   //fetch 로 nodejs Post 값 전달.
   fetch("http://pbl.hknu.ac.kr:51713/insert_post", {
     method: "POST",
@@ -44,10 +45,10 @@ function btn_update_post_onclick() {
     body: JSON.stringify(obj),
   });
 
-  window.location.href = "http://pbl.hknu.ac.kr:51713/post_list?id="+db_uuid;
+  window.location.href = "http://pbl.hknu.ac.kr:51713/post_list?id=" + db_uuid;
 }
 
-//sql 에서 값 가져오기
+// sql 에서 값 가져오기
 fetch("http://pbl.hknu.ac.kr:51713/get_post")
   .then((res) => {
     return res.json();

@@ -17,7 +17,7 @@ body {
   top: 146px;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   border: 1px solid rgba(217,217,217,1);
 }
 .v93_41{
@@ -47,7 +47,7 @@ body {
   top: 180px;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   border: 1px solid rgb(248, 247, 247);
   border-radius: 10px; /* 모서리를 둥글게 */
   overflow: hidden;
@@ -65,7 +65,7 @@ body {
   margin-bottom: 10px; /* 각 카드 사이의 간격 조정 */
 }
 .post-card-42 {
-  width: 90%;
+  width: 95%;
   height: auto;
   background-color: gainsboro;
   background-repeat: no-repeat;
@@ -74,6 +74,7 @@ body {
   border: 1px solid rgb(248, 247, 247);
   border-radius: 10px; /* 모서리를 둥글게 */
   overflow: hidden;
+  margin: 0 auto;
   margin-bottom: 20px; /* 각 카드 사이의 간격 조정 */
 }
 .combined-card {
@@ -89,4 +90,11 @@ nav ul li {
 }
 h1 {
   font-size: 9px;
+}
+#write-button{
+  position: fixed;
+  top: 80%; 
+  left: 85%; 
+  width: 40px;
+  height: 40px;
 }

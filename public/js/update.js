@@ -36,6 +36,7 @@ function btn_update_user_onclick() {
   var user_id_v = user_id.value;
   var user_passwd_v = user_passwd.value;
   var user_name_v = user_name.value;
+  var user_age_v = user_age.value;
 
   //생성할때 전달 오브젝트
   var obj = {
@@ -44,8 +45,6 @@ function btn_update_user_onclick() {
     passwd: user_passwd_v,
     name: user_name_v,
   };
-  console.log("==========")
-  console.log(obj.uuid);
 
   //fetch 로 nodejs Post 값 전달.
   fetch("http://pbl.hknu.ac.kr:51713/update_p", {
@@ -56,5 +55,5 @@ function btn_update_user_onclick() {
     body: JSON.stringify(obj),
   });
 
-  window.location.href = "http://pbl.hknu.ac.kr:51713/login";
+  window.location.href = "http://pbl.hknu.ac.kr:51713/CRUD";
 }

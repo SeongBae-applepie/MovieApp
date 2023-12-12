@@ -10,8 +10,7 @@ console.log(db_num);
 // const btn_add_post = document.getElementById("add_post");
 
 function btn_add_post() {
-  window.location.href =
-    "http://pbl.hknu.ac.kr:51713/insert_post?id="+db_num ;
+  window.location.href = "http://pbl.hknu.ac.kr:51713/insert_post?id=" + db_num;
 }
 
 //sql 에서 값 가져오기
@@ -33,14 +32,11 @@ fetch("http://pbl.hknu.ac.kr:51713/get_all_post")
       const li_uuid = document.createElement("p");
       const li_uuid_post = document.createElement("p");
       const btn_delete_post = document.createElement("button");
-      
+
       user_post_id =
-      data[i].uuid_post + "|" + data[i].uuid_users + "|" + db_num;
+        data[i].uuid_post + "|" + data[i].uuid_users + "|" + db_num;
 
       user_delete_id = data[i].uuid_post + "|" + data[i].uuid_users;
-
-
-
       //객체 Id 값 설정
       li_c.setAttribute("id", user_post_id);
       btn_delete_post.setAttribute("id", user_delete_id);
@@ -86,9 +82,9 @@ fetch("http://pbl.hknu.ac.kr:51713/get_all_post")
         .appendChild(li_movie_id)
         .appendChild(li_movie_name)
         .appendChild(li_uuid_post);
+
       document.getElementById("post_list").appendChild(li_c);
       document.getElementById("post_list").append(btn_delete_post);
-
 
       btn_delete_post.onclick = function (e) {
         // var uuid = e.currentTarget.id;
@@ -98,8 +94,6 @@ fetch("http://pbl.hknu.ac.kr:51713/get_all_post")
         var uuid_post_d = words[0];
         var uuid_user_d = words[1];
 
-        console.log(uuid_user_d);
-        console.log(db_num);
         if (uuid_user_d == db_num) {
           //생성할때 전달 오브젝트
           var obj = {
@@ -120,7 +114,6 @@ fetch("http://pbl.hknu.ac.kr:51713/get_all_post")
           alert("본인의 글만 삭제 가능 합니다.");
         }
       };
-
 
       li_c.onclick = function (e) {
         var uuid = e.currentTarget.id;
