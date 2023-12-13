@@ -1,5 +1,9 @@
 import { getMovieInfo } from "../api/movieApi.js";
 
+const urlParams = new URL(location.href).searchParams;
+
+const db_num = urlParams.get("id");
+
 //DOM 요소 선택
 const title = document.querySelector(".detailmovie-title");
 const poster = document.querySelector(".poster-card");
@@ -12,6 +16,7 @@ const runtime = document.querySelector(".runtime");
 const rating = document.querySelector(".rating");
 const summary = document.querySelector(".movie-summary>dd");
 const bottom_community = document.getElementById("go_c");
+const go_logo = document.getElementById("go_logo");
 var like_mo;
 var title_mo;
 var star_mo;
@@ -42,6 +47,10 @@ const uuid = params.get("uuid");
 const movieId = params.get("movieId");
 const movieSeq = params.get("movieSeq");
 const loading = document.querySelector(".wrapper-etc");
+
+go_logo.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
 
 function visit_user(title_mo2) {
   //sql 에서 값 가져오기

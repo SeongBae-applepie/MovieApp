@@ -6,15 +6,46 @@ console.log("users+id");
 console.log(db_num);
 
 const list_c = document.getElementById("list_c");
-const bottom_home = document.getElementById("go_home");
+// const search_i = document.getElementById("search");
 
+const bottom_c = document.getElementById("go_c");
+const bottom_h = document.getElementById("go_h");
+const bottom_e = document.getElementById("go_e");
+const bottom_m = document.getElementById("go_m");
+const go_logo = document.getElementById("go_logo");
+const search_i = document.getElementById("search");
+search_i.onclick = function () {
+  // console.log("sss");
+  location.href = `http://pbl.hknu.ac.kr:51713/search?uuid=${db_num}`;
+};
+
+go_logo.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
+
+bottom_h.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
+
+bottom_c.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
+};
+bottom_e.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/event?id=${db_num}`;
+};
+bottom_m.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/mypage?id=${db_num}`;
+};
+
+
+// search_i.onclick = function () {
+//   // console.log("sss");
+//   location.href = `http://pbl.hknu.ac.kr:51713/search?uuid=${db_num}`;
+// };
 function add_post() {
   window.location.href = "http://pbl.hknu.ac.kr:51713/insert_post?id=" + db_num;
 }
 
-bottom_home.onclick = function () {
-  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
-};
 
 fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
   .then((res) => {

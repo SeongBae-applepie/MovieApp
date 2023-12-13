@@ -13,81 +13,118 @@
   
   </head>
   <body>
-    <!-- 로고 -->
-    <div class="container-fluid">
-          <a onClick="window.location.reload()">
-            <img id="logo" src="../img/cineverse.png" alt="CineUniverse" style="width: 40%; height: 40%; margin-top:10%;" class="img-fluid">
+    <nav class="navbar fixed-top" style="background-color: white; height: 10vh; border-bottom: 0.1px solid #b7b7b7ff;">
+      <div class="container-fluid">
+        <div class="container d-flex justify-content-between align-items-center">
+          <a id="go_logo">
+            <img id="logo" src="../img/cineverse.png" alt="CineUniverse" style="width: auto; height: 30px;" class="img-fluid"> <!-- 수정된 부분: 크기 및 height 조정 -->
           </a>
+          <div class="d-flex justify-content-end align-items-center w-50">
+            <a id="search" class="nav-link mx-1">
+              <div class="d-flex flex-column align-items-center">
+                <img id="search" src="../img/search.png" alt="search" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
+              </div>
+            </a>
+            <a  class="nav-link mx-1">
+              <div class="d-flex flex-column align-items-center">
+                <img id="notification" src="../img/notification.png" alt="notification" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <ul class="nav nav-tabs justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link square" aria-current="page" >팔로우</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link square" >토론</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link square" onClick="window.location.reload()">게시글</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link square" >소모임</a>
-        </li>
-      </ul>   
-    </div>
-
-    <div class="combined-card">
-      
-      <div id="list_c" class="v93_41">
-        <!-- 여기에 게시글 작성자 이름과 날짜 데이터를 추가 -->
-      </div>
-      <div class="v93_42">
-        <!-- 여기에 게시글 제목과 내용 데이터를 추가 -->
-      </div>
-    </div>     
-    <!-- 글작성 버튼 -->
-    <div class="combined-card row">
-      <div class="v93_41">
-        <!-- 여기에 게시글 작성자 이름과 날짜 데이터를 추가 -->
-      </div>
-      <div class="v93_42">
-        <!-- 여기에 게시글 제목과 내용 데이터를 추가 -->
-      </div>
-    </div>    
-    <a >
-      <img onclick="add_post()" src="../img/writebutton.png" alt="writebutton" id="write-button" />
-    </a>  
-    <!-- 하단 네비게이션바 -->
-    <nav class="navbar fixed-bottom" style="background-color: white; height: 10vh;">
-      <div class="container d-flex justify-content-center align-items-center">
-        <a id="go_home" class="nav-link mx-4" >
-          <div class="d-flex flex-column align-items-center">
-            <img src="../img/home.png" alt="Home">
-            <span class="text">홈</span>
-          </div>
-        </a>
-        <a class="nav-link mx-4" onClick="window.location.reload()">
-          <div class="d-flex flex-column align-items-center">
-            <img src="../img/community.png" alt="Community">
-            <span class="text">커뮤니티</span>
-          </div>
-        </a>
-        <a class="nav-link mx-4" >
-          <div class="d-flex flex-column align-items-center">
-            <img src="../img/event.png" alt="Event">
-            <span class="text">이벤트</span>
-          </div>
-        </a>
-        <a class="nav-link mx-4">
-          <div class="d-flex flex-column align-items-center">
-            <img src="../img/mypage.png" alt="My Page">
-            <span class="text">마이페이지</span>
-          </div>
-        </a>
+    </nav>
+    <nav class="navbar container-fluid fixed-top" style="margin-top: 10vh; background-color: white; height: 7vh; border-bottom: 0.1px solid #b7b7b7ff;">
+      <div class="container-fluid d-flex justify-content-center" style="text-align: center;">
+        <div class="nav nav-tabs justify-content-center"  style="border-bottom-color: transparent;">
+          <li class="nav-item">
+            <a class="nav-link square" aria-current="page" >팔로우</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link square" >토론</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link square" onClick="window.location.reload()">게시글</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link square" >소모임</a>
+          </li>
+        </div>   
       </div>
     </nav>
+   
+
+    <div class="all" style="margin-top: 20vh; margin-bottom: 10vh;">
+        <div class="combined-card">
+        
+        <div id="list_c" class="v93_41">
+          <!-- 여기에 게시글 작성자 이름과 날짜 데이터를 추가 -->
+        </div>
+        <div class="v93_42">
+          <!-- 여기에 게시글 제목과 내용 데이터를 추가 -->
+        </div>
+      </div>     
+      <!-- 글작성 버튼 -->
+      <div class="combined-card row">
+        <div class="v93_41">
+          <!-- 여기에 게시글 작성자 이름과 날짜 데이터를 추가 -->
+        </div>
+        <div class="v93_42">
+          <!-- 여기에 게시글 제목과 내용 데이터를 추가 -->
+        </div>
+      </div>    
+      <a >
+        <img onclick="add_post()" src="../img/writebutton.png" alt="writebutton" id="write-button" />
+      </a> 
+    </div>
+
+
+     <!-- 하단 네비게이션바 -->
+
+     <nav
+     class="navbar fixed-bottom"
+     style="
+       background-color: white;
+       height: 10vh;
+       border-top: 0.1px solid grey;
+     "
+   >
+     <div class="container d-flex justify-content-center align-items-center">
+       <a class="nav-link mx-4"  id="go_h">
+         <div
+           class="d-flex flex-column align-items-center"
+           
+         >
+           <img src="../img/home.png"  />
+           <span class="text">홈</span>
+         </div>
+       </a>
+       <a  class="nav-link mx-4">
+         <!-- 빨간색 변경시 추가 -->
+         <!-- style="filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(82%) contrast(113%);" -->
+         <div id="go_c" class="d-flex flex-column align-items-center"
+         style="
+             filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg)
+               brightness(82%) contrast(113%);
+           ">
+           <img src="../img/community.png" alt="Community" />
+           <span class="text">커뮤니티</span>
+         </div>
+       </a>
+       <a id="go_e" class="nav-link mx-4" >
+         <div class="d-flex flex-column align-items-center">
+           <img src="../img/event.png"  />
+           <span class="text">이벤트</span>
+         </div>
+       </a>
+       <a id="go_m" class="nav-link mx-4">
+         <div class="d-flex flex-column align-items-center">
+           <img src="../img/mypage.png" a />
+           <span class="text">마이페이지</span>
+         </div>
+       </a>
+     </div>
+   </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

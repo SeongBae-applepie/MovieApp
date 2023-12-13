@@ -105,6 +105,7 @@
 }
 .combined-card {
   margin-bottom: 0; /* 각 카드 사이의 간격 조정 */
+  width: 100%;
 }
 
 #write-button {

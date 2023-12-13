@@ -13,7 +13,6 @@
     background-position: center center;
     background-size: cover;
     opacity: 1;
-    border: 10px solid rgb(248, 247, 247);
     overflow: hidden;
     margin-top: 3%;
     margin-left: 3%;
@@ -74,14 +73,14 @@
     background-size: cover;
     border: 1px solid rgb(248, 247, 247);
     border-radius: 10px; /* 모서리를 둥글게 */
-    margin: 0 auto;
+    margin: 10px auto;
   }
   .movieData table {
     margin-left: 12%;
   }
-  @media (min-width: 600px) {
+  @media (max-width: 600px) {
     .movieData table {
-      margin-left: 15%;
+      margin-left: 35%;
     }
   }
   @media (min-width: 900px) {
@@ -91,8 +90,8 @@
   }
   .movieData .example {
     position: absolute;
-    width: 10%;
-    height: 20%;
+    width: auto;
+    height: 155px;
     margin-left: 1%;
     transform: translate(0, 0);
   }

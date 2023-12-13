@@ -6,22 +6,41 @@ const urlParams = new URL(location.href).searchParams;
 const db_num = urlParams.get("id");
 
 console.log("users+id");
-console.log(db_num);
-
-const loadingItem = document.querySelectorAll(".loading");
-const bottom_community = document.getElementById("go_c");
-const debate_ol = document.getElementById("debate_ol");
-// const post_ol = document.getElementById("post_ol");
 const search_i = document.getElementById("search");
+
+const bottom_c = document.getElementById("go_c");
+const bottom_h = document.getElementById("go_h");
+const bottom_e = document.getElementById("go_e");
+const bottom_m = document.getElementById("go_m");
+
+bottom_h.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
+
+bottom_c.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
+};
+bottom_e.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/event?id=${db_num}`;
+};
+bottom_m.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/mypage?id=${db_num}`;
+};
+
 
 search_i.onclick = function () {
   // console.log("sss");
   location.href = `http://pbl.hknu.ac.kr:51713/search?uuid=${db_num}`;
 };
+console.log(db_num);
 
-bottom_community.onclick = function () {
-  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
-};
+const loadingItem = document.querySelectorAll(".loading");
+
+const debate_ol = document.getElementById("debate_ol");
+// const post_ol = document.getElementById("post_ol");
+
+
+
 
 // 일별 박스 오피스 값을 넣어 영화 상세 결과값을 얻어내기
 //배열을 받아 영화에 대한 상세 정보 얻기
