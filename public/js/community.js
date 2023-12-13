@@ -24,15 +24,14 @@ fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
     console.log(data);
     for (var i = 0; i < data.length; i++) {
       user_post_id =
-      data[i].uuid_post + "|" + data[i].uuid_users + "|" + db_num;
-    console.log(user_post_id);
+        data[i].uuid_post + "|" + data[i].uuid_users + "|" + db_num;
+      console.log(user_post_id);
 
       var date = data[i].post_create_date.substr(0, 10);
 
       const div_o = document.createElement("div");
       div_o.setAttribute("class", "combined-card");
       div_o.setAttribute("id", user_post_id);
-
       //41
       const div_1_41 = document.createElement("div");
       div_1_41.setAttribute("class", "post-card post-card-41");
@@ -44,8 +43,13 @@ fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
       const tr_2_41 = document.createElement("tr");
       const td_2_41 = document.createElement("td");
 
+      td_1_41.setAttribute("id", "td_1_41");
+      td_2_41.setAttribute("id", "td_1_41");
+
       var td_1_41_t = document.createTextNode(data[i].name);
+
       td_1_41.appendChild(td_1_41_t);
+
       var td_2_41_t = document.createTextNode("  " + date);
       td_2_41.appendChild(td_2_41_t);
 
@@ -53,10 +57,13 @@ fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
       div_1_41.appendChild(table_41);
 
       table_41.appendChild(tr_1_41);
+      div_1_41.appendChild(table_41);
+      table_41.appendChild(tr_1_41);
       table_41.appendChild(tr_2_41);
-
       tr_1_41.appendChild(td_1_41);
       tr_2_41.appendChild(td_2_41);
+
+      div_o.appendChild(div_1_41);
 
       //42
       const div_1_42 = document.createElement("div");
@@ -81,7 +88,6 @@ fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
 
       //end------
 
-      div_o.appendChild(div_1_41);
       div_o.appendChild(div_1_42);
 
       div_o.onclick = function (e) {

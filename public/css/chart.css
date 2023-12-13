@@ -20,8 +20,15 @@
 }
 
 .container-chart {
+  padding: 100px 10px 0px;
+}
 
-  padding: 5% 1%;
+.wrapper-card.chart{
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.wrapper-card.chart::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .text-charttitle {
@@ -67,7 +74,7 @@
   /*  Grid 레이아웃을 사용하여 자식 요소를 배치 */
   grid-auto-flow: column;
   /* 자동으로 컬럼 방향으로 배치 */
-  gap: 8px;
+  gap: 3px;
   /* 그리드 아이템 사이의 간격 */
 
   overflow: auto;
@@ -81,3 +88,44 @@
 }
 
 
+
+.postData {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none;
+  width: 100%; /* 적절한 퍼센트를 설정해주세요 */
+  height: auto;
+  display: flex;
+}
+
+.postData ::-webkit-scrollbar {
+  display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+
+.postData table {
+  height: auto;
+  width: 100%; /* table 요소의 넓이를 100%로 설정하면 부모 요소의 넓이를 모두 차지 */
+  background-color: #f2f2f2;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border: 1px solid #f2f2f2;
+  border-radius: 10px; /* 모서리를 둥글게 */
+}
+
+.postData td {
+  height: auto;
+  word-wrap: break-word; /* 또는 overflow-wrap: break-word; */
+  word-break: break-all;
+}
+
+
+@media (max-width: 399px) {
+  .postData table {
+    width: 200px;
+  }
+}
+@media (min-width: 400px) {
+  .postData table {
+    width: 200px;
+  }
+}

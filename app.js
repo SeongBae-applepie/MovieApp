@@ -97,6 +97,12 @@ app.get("/mypage", function (request, response) {
   });
 });
 
+app.get("/event", function (request, response) {
+  fs.readFile("./public/html/event.html", "utf8", function (error, data) {
+    response.send(data);
+  });
+});
+
 
 //  ------------------------- get.html ^ -------------------------------------------------
 //글 전체 가져오기
@@ -491,6 +497,7 @@ app.post("/update_users_movie_list_insert", function (req, res) {
 app.post("/update_users_movie_list_like_update", function (req, res) {
   console.log("uumli");
   console.log(req.body);
+
   console.log(req.body.movie_like);
   const conn = mysql.createConnection(dbconfig);
   conn.connect(); // mysql과 연결
@@ -521,12 +528,12 @@ app.post("/update_users_movie_list_like", function (req, res) {
 });
 
 app.post("/update_users_movie_list_star", function (req, res) {
-  console.log("stars");
+  console.log("stars!!!!");
   console.log(req.body);
   const conn = mysql.createConnection(dbconfig);
 
   conn.connect(); // mysql과 연결
-  var sql = `UPDATE users_movie_list SET movie_star =${req.body.movie_star} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = ${req.body.movie_id} `;
+  var sql = `UPDATE users_movie_list SET movie_star=${req.body.movie_star} WHERE uuid_users = "${req.body.uuid_users}" AND movie_id = ${req.body.movie_id} `;
   conn.query(sql, function (err, rows, fields) {
     if (err) {
       console.error("error connecting: " + err.stack);

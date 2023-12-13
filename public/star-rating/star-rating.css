@@ -1,52 +1,44 @@
-@charset "UTF-8";
-
-.starrating {
-    position: relative;
-    top: 70px;
-    bottom: 10px;
+.star-rating {
+  margin-top: 100px;
 }
 
-#star fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역 자리 차지*/
-    border: 0; /* 필드셋 테두리 제거 */
+.star-rating-container {
+  width: 100%;
+  text-align: center;
 }
 
-#star input[type=radio]{
-    display: none; /* 라디오박스 감춤 */
+.current-star-rating {
+  margin: 5px;
+  text-align: left;
 }
 
-#star label{
-    font-size: 3em; /* 이모지 크기 */
-    color: transparent; /* 기존 이모지 색상 투명하게 */
-    text-shadow: 0 0 0 #f0f0f0; /* 텍스트에 그림자 추가해 새로운 이모지 색상 지정 */
+.box-current-star-rating {
+  display: inline-block;
+  margin-left: 15px;
+  border: 1px solid #db0000;
+  border-radius: 15px;
 }
 
-#star label:hover{
-    color:black; /* 텍스트 색상 검정으로 설정 */
-    opacity:0.5; /* 텍스트 투명도 50% */
+
+@import url(https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css);
+
+.star-rating-container {
+  --main-color: #dcdcdc;
+  --hovered-color: #db000080;
+  --selected-color: #db0000;
 }
 
-/* 호버된 라벨 이후에 나오는 모든 라벨에 대한 스타일 정의 */
-#star label:hover ~ label{
-    /* 호버된 라벨과 동일 */
-    opacity:0.5;
-    color:black;
+/* 컴포넌트는 스스로 배치(위치, 크기, 여백 등)하지 않는다. */
+.star-rating-container>i {
+  font-size: 50px;
+  color: var(--main-color);
+  cursor: pointer;
 }
 
-/* 다시 정의 */
-/* 덮어쓰기 */
-#star fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-    direction: rtl; /* 이모지 순서 반전 */
-    border: 1px; /* 필드셋 테두리 제거 */
+.star-rating-container>i.hovered {
+  color: var(--hovered-color);
 }
 
-#star fieldset legend{
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-}
-
-/* 선택된 라디오 버튼 다음에 나오는 라벨에 대한 스타일 정의 */
-#star input[type=radio]:checked ~ label{
-    opacity: 1; /* 텍스트 투명도 100% */
-    color:black;
+.star-rating-container>i.selected {
+  color: var(--selected-color);
 }

@@ -27,6 +27,14 @@ const content_text = document.getElementById("content_text");
 // const comment_name = document.getElementById("comment_name");
 // const comment_content = document.getElementById("comment_content");
 
+
+$(window).on('load resize', function() {
+  var imgHeight = $('.example').height(); // 이미지 높이를 가져옴 example << 이미지 이름 
+  var newHeight = imgHeight * 1.1; // 이미지 높이의 110%를 계산
+  $('.movieData').css('height', newHeight + 'px'); // .movieData의 높이를 새로운 높이로 설정
+});
+
+
 function post_views() {
   obj = {
     uuid_post: uuid_post,
