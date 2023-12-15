@@ -2,7 +2,8 @@ import { getMovieInfo } from "../api/movieApi.js";
 
 const urlParams = new URL(location.href).searchParams;
 
-const db_num = urlParams.get("id");
+const db_num = urlParams.get("uuid");
+console.log(db_num)
 
 //DOM 요소 선택
 const title = document.querySelector(".detailmovie-title");
@@ -15,8 +16,8 @@ const genre = document.querySelector(".genre");
 const runtime = document.querySelector(".runtime");
 const rating = document.querySelector(".rating");
 const summary = document.querySelector(".movie-summary>dd");
-const bottom_community = document.getElementById("go_c");
-const go_logo = document.getElementById("go_logo");
+//write-button
+const w_b = document.getElementById("write-button");
 var like_mo;
 var title_mo;
 var star_mo;
@@ -48,9 +49,42 @@ const movieId = params.get("movieId");
 const movieSeq = params.get("movieSeq");
 const loading = document.querySelector(".wrapper-etc");
 
+const bottom_c = document.getElementById("go_c");
+const bottom_h = document.getElementById("go_h");
+const bottom_e = document.getElementById("go_e");
+const bottom_m = document.getElementById("go_m");
+const search_i = document.getElementById("search");
+search_i.onclick = function () {
+  // console.log("sss");
+  location.href = `http://pbl.hknu.ac.kr:51713/search?uuid=${db_num}`;
+};
+
 go_logo.onclick = function () {
   location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
 };
+
+bottom_h.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
+
+bottom_c.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
+};
+bottom_e.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/event?id=${db_num}`;
+};
+bottom_m.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/mypage?id=${db_num}`;
+};
+
+go_logo.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+};
+
+w_b.onclick = function(){
+  window.location.href = "http://pbl.hknu.ac.kr:51713/insert_post?id=" + db_num;
+}
+
 
 function visit_user(title_mo2) {
   //sql 에서 값 가져오기

@@ -216,3 +216,10 @@ div > dt {
   word-break: keep-all;
 }
 
+#write-button {
+  position: fixed;
+  top: 80%;
+  left: 85%;
+  width: 40px;
+  height: 40px;
+}

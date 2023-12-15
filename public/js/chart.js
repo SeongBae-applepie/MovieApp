@@ -117,6 +117,7 @@ async function get_hot_debate() {
     })
     .then((data) => {
       for (var i = 0; i < data.length; i++) {
+
         const div_post_data = document.createElement("div");
         div_post_data.setAttribute("class", "postData");
         div_post_data.style.marginTop = "30%";
@@ -135,14 +136,27 @@ async function get_hot_debate() {
           data[i].uuid_post + "|" + data[i].uuid_users + "|" + db_num;
 
         //객체 Id 값 설정
-        div_post_data.setAttribute("id", user_post_id);
+        table.setAttribute("id", user_post_id);
 
-        //객체 Text값 설정
-        const title = document.createTextNode("제목 : " + data[i].post_title);
+        var title_array;
+        var content_array;
 
-        const content = document.createTextNode(
-          "내용 : " + data[i].post_content
-        );
+        if (data[i].post_title.length > 15) {
+          title_array = data[i].post_movie_name.substr(0, 20);
+        } else {
+          title_array = data[i].post_movie_name;
+        }
+
+        if (data[i].post_content.length > 15) {
+          content_array = data[i].post_content.substr(0, 20);
+        } else {
+          content_array = data[i].post_content;
+        }
+
+        console.log(content_array);
+        console.log(title_array);
+        const content = document.createTextNode(content_array);
+        const title = document.createTextNode(title_array);
 
         //list text append
         // li_title.appendChild(title);
@@ -194,6 +208,7 @@ async function get_hot_post() {
     })
     .then((data) => {
       for (var i = 0; i < data.length; i++) {
+        console.log(data[i]);
         const table = document.createElement("table");
         const tbody = document.createElement("tbody");
         const tr1 = document.createElement("tr");
@@ -213,22 +228,22 @@ async function get_hot_post() {
         var title_array;
         var content_array;
 
-        if (data[i].post_title.length > 10) {
-          title_array = data[i].post_title.substr(0, 10);
+        if (data[i].post_title.length > 15) {
+          title_array = data[i].post_movie_name.substr(0, 20);
         } else {
-          title_array = data[i].post_title;
+          title_array = data[i].post_movie_name;
         }
 
-        if (data[i].post_content.length > 10) {
-          content_array = data[i].post_content.substr(0, 10);
+        if (data[i].post_content.length > 15) {
+          content_array = data[i].post_content.substr(0, 20);
         } else {
           content_array = data[i].post_content;
         }
 
         console.log(content_array);
         console.log(title_array);
-        const content = document.createTextNode("내용 : " + content_array);
-        const title = document.createTextNode("제목 : " + title_array);
+        const content = document.createTextNode(content_array);
+        const title = document.createTextNode(title_array);
 
         td_title.appendChild(title);
         td_content.appendChild(content);
@@ -255,7 +270,10 @@ async function get_hot_post() {
 //페이지가 로드되면 실행되는 이벤트 핸들러
 window.addEventListener("load", async () => {
   //함수 호출해 일별 박스 오피스 결과 얻어오기
-  const results = await getBoxOfficeList();
+  // const results = await getBoxOfficeList();
+
+  const results = JSON.parse(window.localStorage.getItem("movie"));
+
   //각 영화에 대한 상세 정보 얻어와 표시
   movieDetail(results);
   get_hot_debate();

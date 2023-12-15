@@ -105,10 +105,10 @@ fetch("http://pbl.hknu.ac.kr:51713/get_uuid_users_name")
       const tr_2_42 = document.createElement("tr");
       const td_2_42 = document.createElement("td");
 
-      var td_1_42_t = document.createTextNode("제목 : " + data[i].post_title);
-      td_1_42.appendChild(td_1_42_t);
-
-      var td_2_42_t = document.createTextNode("내용 : " + data[i].post_content);
+      // var td_1_42_t = document.createTextNode( <strong> + data[i].post_title</strong> );
+      // td_1_42.appendChild(td_1_42_t);
+      td_1_42.innerHTML = "<strong>" + data[i].post_title+ "</strong>";
+            var td_2_42_t = document.createTextNode(data[i].post_content);
       td_2_42.appendChild(td_2_42_t);
 
       div_1_42.appendChild(table_42);

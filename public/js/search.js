@@ -13,15 +13,25 @@ const searchedList = document.querySelector(".container-searched-list");
 const gridBox = document.querySelector(".grid-box");
 const strong = document.querySelector("strong");
 const searchButton = document.getElementById("search-button");
-const bottom_home = document.getElementById("go_h");
-const bottom_community = document.getElementById("go_c");
 
-bottom_community.onclick = function () {
-  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
+const bottom_c = document.getElementById("go_c");
+const bottom_h = document.getElementById("go_h");
+const bottom_e = document.getElementById("go_e");
+const bottom_m = document.getElementById("go_m");
+
+
+bottom_h.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
 };
 
-bottom_home.onclick = function () {
-  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${db_num}`;
+bottom_c.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${db_num}`;
+};
+bottom_e.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/event?id=${db_num}`;
+};
+bottom_m.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/mypage?id=${db_num}`;
 };
 
 //검색 쿼리 저장 객체 생성

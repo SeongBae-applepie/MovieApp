@@ -26,6 +26,51 @@ const movie_detail = document.getElementById("movie_detail");
 const content_text = document.getElementById("content_text");
 // const comment_name = document.getElementById("comment_name");
 // const comment_content = document.getElementById("comment_content");
+// btn-heart
+const like_btn = document.getElementById("like_i");
+const num_like = document.getElementById("num");
+like_i = 0;
+like_btn.onclick = function(){
+  if(like_i == 0){
+    like_btn.src = '../img/like.png'
+    like_i =1;
+    num_like.innerText="5"
+  }else{
+    like_btn.src = '../img/redlike.png'
+    like_i =0;
+    num_like.innerText="6"
+  }
+
+
+}
+const bottom_c = document.getElementById("go_c");
+const bottom_h = document.getElementById("go_h");
+const bottom_e = document.getElementById("go_e");
+const bottom_m = document.getElementById("go_m");
+const go_logo = document.getElementById("go_logo");
+const search_i = document.getElementById("search");
+search_i.onclick = function () {
+  // console.log("sss");
+  location.href = `http://pbl.hknu.ac.kr:51713/search?uuid=${uuid_post_user}`;
+};
+
+go_logo.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${uuid_post_user}`;
+};
+
+bottom_h.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/chart?id=${uuid_post_user}`;
+};
+
+bottom_c.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/community?id=${uuid_post_user}`;
+};
+bottom_e.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/event?id=${uuid_post_user}`;
+};
+bottom_m.onclick = function () {
+  location.href = `http://pbl.hknu.ac.kr:51713/mypage?id=${uuid_post_user}`;
+};
 
 
 $(window).on('load resize', function() {
@@ -83,7 +128,7 @@ fetch("http://pbl.hknu.ac.kr:51713/get_id_post?id=" + uuid_post)
       var date = data[i].post_create_date.substr(0, 10);
       a = document.createTextNode(data[i].post_movie_name);
       movie_title_text.appendChild(a);
-      // name_text.innerText; //작성자 이름
+      // name_text.appendChild(); //작성자 이름
       b = document.createTextNode(date);
       date_text.appendChild(b);
       c = document.createTextNode(data[i].post_title);
@@ -91,8 +136,8 @@ fetch("http://pbl.hknu.ac.kr:51713/get_id_post?id=" + uuid_post)
       poster.src = data[i].post_movie_poster;
       d = document.createTextNode(data[i].post_movie_name);
       movie_title_text2.appendChild(d);
-      f = document.createTextNode("##");
-      movie_detail.appendChild(f);
+
+      // movie_detail.appendChild(f);
       e = document.createTextNode(data[i].post_content);
       content_text.appendChild(e);
     }

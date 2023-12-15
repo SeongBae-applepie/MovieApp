@@ -23,36 +23,35 @@
   </head>
   <body>
     <nav class="navbar fixed-top" style="background-color: white; height: 10vh; border-bottom: 0.1px solid #b7b7b7ff;">
-      <div class="container-fluid">
-        <div class="container d-flex justify-content-between align-items-center">
-          <a id="go_logo">
-            <img id="logo" src="../img/cineverse.png" alt="CineUniverse" style="width: auto; height: 30px;" class="img-fluid"> <!-- 수정된 부분: 크기 및 height 조정 -->
-          </a>
-          <div class="d-flex justify-content-end align-items-center w-50">
-            <a id="search" class="nav-link mx-1">
-              <div class="d-flex flex-column align-items-center">
-                <img id="search" src="../img/search.png" alt="search" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
-              </div>
+        <div class="container-fluid">
+          <div class="container d-flex justify-content-between align-items-center">
+            <a id="go_logo">
+              <img id="logo" src="../img/cineverse.png" alt="CineUniverse" style="width: auto; height: 30px;" class="img-fluid"> <!-- 수정된 부분: 크기 및 height 조정 -->
             </a>
-            <a  class="nav-link mx-1">
-              <div class="d-flex flex-column align-items-center">
-                <img id="notification" src="../img/notification.png" alt="notification" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
-              </div>
-            </a>
+            <div class="d-flex justify-content-end align-items-center w-50">
+              <a id="search" class="nav-link mx-1">
+                <div class="d-flex flex-column align-items-center">
+                  <img id="search" src="../img/search.png" alt="search" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
+                </div>
+              </a>
+              <a  class="nav-link mx-1">
+                <div class="d-flex flex-column align-items-center">
+                  <img id="notification" src="../img/notification.png" alt="notification" style="width: auto; max-height: 40px; height: 70%;" class="img-fluid"> <!-- 수정된 부분: 크기 및 max-height 조정 -->
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+
+
+      <h1 style="margin-top: 20vh; text-align: center;"><strong>오류가 발생했습니다. <br> 다시 로드해주세요.</strong></h1>
+
     
-    <div class="container d-grid gap-2" style="margin-top: 10vh; margin-bottom: 11vh;">
-        <img id="event1" src="../img/event1.jpg" alt="event1" style="width: 100%;">
-        <img id="event2" src="../img/event2.jpg" alt="event2" style="width: 100%;">
-        <img id="event3" src="../img/event3.jpg" alt="event3" style="width: 100%;">
-        <img id="event4" src="../img/event4.jpg" alt="event4" style="width: 100%;">
-        <img id="event5" src="../img/event5.jpg" alt="event5" style="width: 100%;">
-        <img id="event6" src="../img/event6.jpg" alt="event6" style="width: 100%;">    
-    </div>
-   
+    
+
+
 
 
 
@@ -70,7 +69,7 @@
        <a class="nav-link mx-4"  id="go_h">
          <div
            class="d-flex flex-column align-items-center"
-          
+           
          >
            <img src="../img/home.png"  />
            <span class="text">홈</span>
@@ -79,17 +78,14 @@
        <a  class="nav-link mx-4">
          <!-- 빨간색 변경시 추가 -->
          <!-- style="filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg) brightness(82%) contrast(113%);" -->
-         <div id="go_c" class="d-flex flex-column align-items-center">
+         <div id="go_c" class="d-flex flex-column align-items-center"
+         >
            <img src="../img/community.png" alt="Community" />
            <span class="text">커뮤니티</span>
          </div>
        </a>
        <a id="go_e" class="nav-link mx-4" >
-         <div class="d-flex flex-column align-items-center"
-         style="
-         filter: invert(16%) sepia(89%) saturate(6054%) hue-rotate(358deg)
-           brightness(82%) contrast(113%);
-       ">
+         <div class="d-flex flex-column align-items-center">
            <img src="../img/event.png"  />
            <span class="text">이벤트</span>
          </div>
@@ -106,7 +102,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
   </body>
-  <script type="module" src="../js/event.js"></script>
+  <script src="../js/notfound.js"></script>
+
 </html>
 
 

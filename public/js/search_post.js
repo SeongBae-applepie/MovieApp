@@ -171,7 +171,7 @@ const createSearchedList = (list, compare) => {
   // 최종 결과 배열 순회하면서 각 항목에 표시할 HTML 요소 만들기
   for (let i = 0; i < Math.min(20, orderedResult.length); i++) {
     // 상위 20개만 출력하도록 수정
-    const li = document.createElement("ol");
+    const li = document.createElement("div");
     const div = document.createElement("div");
     const releaseDate = document.createElement("span");
     const span = document.createElement("span");
@@ -196,7 +196,7 @@ const createSearchedList = (list, compare) => {
 
     div.classList.add("title-box");
     span.classList.add("movie-title");
-    releaseDate.textContent = `개봉연도: ${orderedResult[i].prodYear}년`;
+    releaseDate.innerHTML = `<br><br>개봉연도: ${orderedResult[i].prodYear}년`;
     // 검색어와 일치 부분 강조 위해
     // strong 태그로 감싼 HTML 생성
     const filteredTitle = orderedResult[i].title.replace(
@@ -205,27 +205,27 @@ const createSearchedList = (list, compare) => {
     );
     // 제목에 삽입
     span.insertAdjacentHTML("afterbegin", filteredTitle);
-      p_sp.style.height = "150px";
-      p_sp.style.width = "100px";
+      p_sp.style.height = "auto";
+      p_sp.style.width = "150px";
       span.style.width="200px";
       div.setAttribute("class","row");
     if (poster !== "") {
       p_sp.src = poster;
     } else {
-      p_sp.src ="../img/CineUniverse.png";
+      p_sp.src ="../img/bgCineUniverse.png";
       // poster = "../img/CineUniverse.png";
     
     }
    
-    li.style.border = "1px solid black";
     li.style.margin = "5px";
-    li.style.width = "300px";
+    li.style.width = "100%";
     // 요소들을 DOM에 추가
     fragment.appendChild(li);
     li.appendChild(div);
-    div.appendChild(span);
-    div.appendChild(releaseDate);
     div.appendChild(p_sp);
+    div.appendChild(span).appendChild(releaseDate);
+    // div.appendChild(releaseDate);
+    
     // 각 영화 요소에 클릭 이벤트 리스너(상세페이지로 이동하는) 추가
     li.addEventListener("click", (e) => {
       //movieSeq
@@ -233,8 +233,8 @@ const createSearchedList = (list, compare) => {
       var ss = e.currentTarget.id.split("|");
       searchInput.value = ss[0];
       movie_id = ss[1];
-      poster_div.style.height = "250px"
-      poster_div.style.height = "200px"
+      poster_div.style.height = "auto"
+      poster_div.style.width = "150px"
       if (ss[2] !== "") {
         poster_div.src = ss[2];
         get_poster_url= ss[2];
